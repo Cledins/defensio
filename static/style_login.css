@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f7f3ee; /* Changer la couleur de fond */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,13 +10,14 @@ body {
 
 .login-container {
     background-color: #fff;
-    padding: 20px;
+    padding: 30px; /* Multiplier la taille par 1.5 */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
     text-align: center;
+    color: #2d2626; /* Changer la couleur de la police */
 }
 
 form {
@@ -26,6 +27,8 @@ form {
 
 label {
     margin-bottom: 8px;
+    text-align: center; /* Centrer le texte */
+    color: #2d2626; /* Changer la couleur de la police */
 }
 
 input {
@@ -37,13 +40,13 @@ input {
 
 button {
     padding: 10px;
-    background-color: #4caf50;
-    color: #fff;
+    background-color: #ecdd7b; /* Changer la couleur du bouton */
+    color: #2d2626; /* Changer la couleur de la police */
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #c8b96d; /* Changer la couleur au survol */
 }
