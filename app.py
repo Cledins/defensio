@@ -9,7 +9,6 @@ from sqlitedict import SqliteDict
 from flask_cors import CORS
 from flask import Response
 import traceback 
-import openai
 import requests
 import json 
 import phases.first_phase       #on sait jamais de combien de librairies on a besoin
