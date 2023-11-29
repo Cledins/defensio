@@ -23,6 +23,13 @@ def login():
 @app.route('/session')
 def session():
     return render_template("index.html")
+
+@app.route('/identification', methods=['POST'])
+def identification():
+    id = request.form['number']
+    print(id)
+    return('', 200)
+
     
 if __name__ == '__main__':
     app.run(port=5000)
