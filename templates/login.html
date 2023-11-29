@@ -13,9 +13,14 @@
         <form action="/identification" method="post">
             <label for="number">Numéro du groupe</label>
             <input type="text" id="number" name="number" required>
-            <button type="submit">Découvre ton royaume</button>
+            <button id="submit" type="submit">Découvre ton royaume</button>
         </form>
     </div>
-
+    <script>
+        document.getElementById("submit").addEventListener("click", function() {
+            const number = document.getElementById("number").value.toString();
+            document.cookie = "number=" + number;
+        });
+    </script>
 </body>
 </html>

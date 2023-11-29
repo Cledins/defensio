@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style_login.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Defensio</title>
 </head>
 
@@ -15,7 +16,7 @@
                 <!-- Logo en haut à gauche -->
                 <img src="path/vers/votre/logo.png" alt="Votre Logo" class="w-16 h-16">
                 <!-- Numéro du groupe en haut à droite -->
-                <div class="text-xl font-bold">Groupe #1</div>
+                <div id="numberDisplay" class="text-xl font-bold">Groupe #1</div>
             </div>
     
             <!-- Contenu principal -->
@@ -33,7 +34,21 @@
             </div>
         </div>
     
+        <script>
+            function getCookie(name) {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.indexOf(name + "=") === 0) {
+                return cookie.substring(name.length + 1);
+                }
+            }
+            return "";
+            };
 
+            var storedNumber = getCookie("number");
+            $("#numberDisplay").text("Group "+storedNumber);
+        </script>
    
 </body>
 </html>

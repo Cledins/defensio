@@ -1,6 +1,6 @@
 import flask
 from flask import Flask, jsonify, after_this_request, abort, make_response
-from flask import render_template, request, send_file
+from flask import render_template, request, send_file, redirect
 import re
 import os
 import sys
@@ -24,11 +24,21 @@ def login():
 def session():
     return render_template("index.html")
 
-@app.route('/identification', methods=['POST'])
+@app.route('/identification', methods=['GET','POST'])
 def identification():
-    id = request.form['number']
-    print(id)
-    return('', 200)
+    success=False
+    if request.method=='POST':
+        success=True
+        id = request.form['number']
+        print("Bienvenue ", id)
+    else:
+        number = request.args.get('number')
+        if number==None:
+            return redir
+        success=True
+        print("Je sais déjà que tu es : ",number)
+    resp = jsonify(success=success)
+    return render_template("index.html")
 
     
 if __name__ == '__main__':
