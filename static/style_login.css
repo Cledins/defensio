@@ -18,16 +18,18 @@ body {
 
 .login-container {
     background-color: #fff;
-    padding: 50px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
     margin-top:10%;
 }
 
-.h2 {
-    text-align: center;
-    color: #2d2626;
+.logo {
+    max-width: 20%; /* Le logo ne dépassera pas la largeur du conteneur */
+    height: auto; /* La hauteur s'ajustera proportionnellement à la largeur */
+    display: block; /* Pour résoudre les problèmes de marges autour de l'image */
+    margin: 0 auto; /* Centrer l'image horizontalement dans le conteneur */
 }
 
 form {
