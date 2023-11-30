@@ -8,14 +8,34 @@
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Bienvenue dans Defensio</h2>
-        <form action="/identification" method="post">
-            <label for="number">Numéro du groupe</label>
-            <input type="text" id="number" name="number" required>
-            <button id="submit" type="submit">Découvre ton royaume</button>
-        </form>
+    <div class="flex-container">
+        <div class="login-container">
+            <h2>Bienvenue dans Defensio</h2>
+            <form action="/identification" method="post">
+                <label for="number">Numéro du groupe</label>
+                <input type="text" id="number" name="number" required>
+                <button id="submit" type="submit">Découvre ton royaume</button>
+            </form>
+        </div>
+
+        <!-- Waves Container -->
+        <div class="waves-container">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(80, 194, 215, 0.7)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(80, 194, 215, 0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(80, 194, 215, 0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#50C2D7" />
+                </g>
+            </svg>
+        </div>
+        <!-- Waves end -->
     </div>
+        
     <script>
         document.getElementById("submit").addEventListener("click", function() {
             const number = document.getElementById("number").value.toString();
