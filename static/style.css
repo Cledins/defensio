@@ -2,9 +2,29 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f7f3ee;
     display: flex;
+    flex-direction: column; /* Utiliser une disposition en colonne pour empiler les éléments verticalement */
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
 }
 
+#flex-container-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Aligner les éléments à chaque extrémité du conteneur */
+    align-items: center;
+    width: 100%; /* Utiliser 100% de la largeur disponible */
+    padding: 20px; /* Ajouter un peu d'espace autour des éléments */
+}
+
+#numberDisplay {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+/* Ajouter du style pour votre logo */
+img {
+    width: 80px;
+    height: auto;
+}

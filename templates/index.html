@@ -3,52 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style_login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Defensio</title>
 </head>
 
     <body class="bg-gray-200">
-
-        <div class="container mx-auto p-4">
-            <!-- En-tête -->
-            <div class="flex justify-between items-center mb-4">
+        <div id="flex-container-1" class="flex-container">
                 <!-- Logo en haut à gauche -->
-                <img src="path/vers/votre/logo.png" alt="Votre Logo" class="w-16 h-16">
+                <img src="/static/logo.png" alt="Votre Logo" class="w-16 h-16">
                 <!-- Numéro du groupe en haut à droite -->
                 <div id="numberDisplay" class="text-xl font-bold">Groupe #1</div>
-            </div>
-    
-            <!-- Contenu principal -->
-            <div class="flex">
-                <!-- Cartes déjà piochées à gauche -->
-                <div class="w-1/4 pr-4">
-                    <!-- Mettez ici votre code pour afficher les cartes déjà piochées -->
-                    <!-- Utilisez des boucles ou d'autres logiques pour afficher dynamiquement ces cartes -->
-                </div>
-    
-                <!-- Carte qui s'affichera au milieu -->
-                <div class="w-1/2 bg-white p-8">
-                    <!-- Mettez ici votre code pour afficher la carte principale -->
-                </div>
-            </div>
+           
         </div>
-    
-        <script>
-            function getCookie(name) {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                if (cookie.indexOf(name + "=") === 0) {
-                return cookie.substring(name.length + 1);
-                }
-            }
-            return "";
-            };
+    </div>
 
-            var storedNumber = getCookie("number");
-            $("#numberDisplay").text("Group "+storedNumber);
-        </script>
+
+    <script>
+        function getCookie(name) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(name + "=") === 0) {
+            return cookie.substring(name.length + 1);
+            }
+        }
+        return "";
+        };
+
+        var storedNumber = getCookie("number");
+        $("#numberDisplay").text("Group "+storedNumber);
+    </script>
    
 </body>
 </html>
