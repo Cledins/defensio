@@ -15,7 +15,7 @@ body {
     justify-content: space-between; /* Aligner les éléments à chaque extrémité du conteneur */
     align-items: center;
     width: 100%; /* Utiliser 100% de la largeur disponible */
-    padding: 20px; /* Ajouter un peu d'espace autour des éléments */
+    padding: 10px; /* Ajouter un peu d'espace autour des éléments */
 }
 
 #numberDisplay {
@@ -25,6 +25,6 @@ body {
 
 /* Ajouter du style pour votre logo */
 img {
-    width: 80px;
+    width: 130px;
     height: auto;
 }
