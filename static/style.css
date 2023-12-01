@@ -4,7 +4,6 @@ body {
     display: flex;
     flex-direction: column; /* Utiliser une disposition en colonne pour empiler les éléments verticalement */
     align-items: center;
-    justify-content: center;
     height: 100vh;
     margin: 0;
 }
@@ -13,7 +12,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between; /* Aligner les éléments à chaque extrémité du conteneur */
-    align-items: center;
     width: 100%; /* Utiliser 100% de la largeur disponible */
     padding: 10px; /* Ajouter un peu d'espace autour des éléments */
 }
