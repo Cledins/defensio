@@ -18,6 +18,20 @@
         </div>
     </div>
 
+    <div id="flex-container-2" class="flex-container">
+        <!-- Jauges -->    
+        <div id="Jauge1">
+        </div>
+        <div id="Jauge2">
+        </div>
+        <div id="Jauge3">
+        </div>
+   
+    </div>
+
+
+    <!-- Add a container for the cards -->
+    <div id="card-container" class="flex-container"></div>
 
     <script>
         function getCookie(name) {
@@ -35,6 +49,57 @@
         $("#numberDisplay").text("Group "+storedNumber);
     </script>
    
+   <script>
+    let currentCardIndex = 0;
+
+    function renderCard(card) {
+        const cardsContainer = document.getElementById('card-container');
+        cardsContainer.innerHTML = ''; // Clear previous card
+
+        const cardElement = document.createElement('div');
+        cardElement.innerHTML = `
+            <img src="../static/carte.png" alt="${card.name}">
+            <p>${card.name}</p>
+            <button onclick="handleCardChoice('yes')">Oui</button>
+            <button onclick="handleCardChoice('no')">Non</button>
+        `;
+        cardsContainer.appendChild(cardElement);
+    }
+
+    function handleCardChoice(choice) {
+        // Handle the choice logic here
+        // ...
+
+        // Move to the next card
+        currentCardIndex++;
+
+        // Fetch the next card data from the Flask endpoint
+        fetch('/api/cards')
+            .then(response => response.json())
+            .then(data => {
+                if (currentCardIndex < data.cards.length) {
+                    renderCard(data.cards[currentCardIndex]);
+                } else {
+                    // All cards have been displayed, you may want to handle this case
+                    console.log("All cards have been displayed");
+                }
+            });
+    }
+
+    // Initial rendering of the first card
+    fetch('/api/cards')
+        .then(response => response.json())
+        .then(data => {
+            if (currentCardIndex < data.cards.length) {
+                renderCard(data.cards[currentCardIndex]);
+            } else {
+                // Handle the case when there are no cards
+                console.log("No cards available");
+            }
+        });
+</script>
+
+
 </body>
 </html>
 

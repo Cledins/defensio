@@ -1,4 +1,4 @@
-Choix	Oui R	Oui C	Oui I 	Non R	Non C 	Non I 	feu	terre	eau	air	intro	outro	
+Choix	Oui_R	Oui_C	Oui_I 	Non_R	Non_C 	Non_I 	feu	terre	eau	air	intro	outro	
 Marier la princesse, fille du roi, avec un prince voisin pour établir une alliance avec un autre royaume 	15	10	-15	-10	-10	10							
 Augmenter le budget de l'armée	5	15	-15	0	-10	15							
 Accepter l'aide d'un sorcier	5	0	10	-10	-5	-10							
