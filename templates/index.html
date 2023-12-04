@@ -50,15 +50,6 @@
     </script>
    
    <script>
-    let currentCardIndex = 0;
-    let data;
-
-    fetch('/api/cards')
-            .then(response => response.json())
-            .then(apidata => {
-                data = apidata;
-            });
-
     function renderCard(card) {
         const cardsContainer = document.getElementById('card-container');
         cardsContainer.innerHTML = ''; // Clear previous card
@@ -80,28 +71,23 @@
         // Move to the next card
         currentCardIndex++;
 
-        // Fetch the next card data from the Flask endpoint
-        //fetch('/api/cards')
-          //  .then(response => response.json())
-            //.then(data => {
-                if (currentCardIndex < data.cards.length) {
-                    renderCard(data.cards[currentCardIndex]);
-                } else {
-                    // All cards have been displayed, you may want to handle this case
-                    console.log("All cards have been displayed");
-                };
+        // Render the next card data
+        if (currentCardIndex < data.cards.length) {
+            renderCard(data.cards[currentCardIndex]);
+        } else {
+            // All cards have been displayed, you may want to handle this case
+            console.log("All cards have been displayed");
+        };
     }
 
-    // Initial rendering of the first card
+    let currentCardIndex = 0;
+    let data;
+
     fetch('/api/cards')
         .then(response => response.json())
-        .then(data => {
-            if (currentCardIndex < data.cards.length) {
-                renderCard(data.cards[currentCardIndex]);
-            } else {
-                // Handle the case when there are no cards
-                console.log("No cards available");
-            }
+        .then(apidata => {
+            data = apidata;
+            renderCard(data.cards[currentCardIndex]);
         });
 </script>
 
