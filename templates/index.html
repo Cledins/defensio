@@ -13,25 +13,36 @@
                 <!-- Logo en haut à gauche -->
                 <img src="/static/logo.png" alt="Votre Logo" class="w-16 h-16">
                 <!-- Numéro du groupe en haut à droite -->
-                <div id="numberDisplay" class="text-xl font-bold">Groupe #1</div>
+                <div id="numberDisplay" class="text-xl font-bold">Équipe #1</div>
            
         </div>
     </div>
 
     <div id="flex-container-2" class="flex-container">
         <!-- Jauges -->    
-        <div id="Jauge1">Jauge1
+        <div id="JaugeC">JaugeC
         </div>
-        <div id="Jauge2">Jauge2
+        <div id="JaugeR">JaugeR
         </div>
-        <div id="Jauge3">Jauge3
+        <div id="JaugeI">JaugeI
         </div>
    
     </div>
 
+    <div id="flex-container-3" class="flex-container">
+        <div id="card-container" class="flex-container">
+            <!-- Content for the main card container -->
+            Card Content
+        </div>
 
-    <!-- Add a container for the cards -->
-    <div id="card-container" class="flex-container"></div>
+        <div class="additional-containers">
+            <!-- Additional flex containers (4 in this example) -->
+            <div class="additional-container">Défense feu</div>
+            <div class="additional-container">Défense terre</div>
+            <div class="additional-container">Défense air</div>
+            <div class="additional-container">Défense eau</div>
+        </div>
+    </div>
 
     <script>
         function getCookie(name) {

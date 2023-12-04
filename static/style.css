@@ -12,8 +12,46 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between; /* Aligner les éléments à chaque extrémité du conteneur */
-    width: 100%; /* Utiliser 100% de la largeur disponible */
+    width: 95%; /* Utiliser 90% de la largeur disponible */
     padding: 10px; /* Ajouter un peu d'espace autour des éléments */
+}
+
+
+#flex-container-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    width: 20%; 
+    padding: 10px; 
+}
+
+#flex-container-3 {
+    display: flex;
+}
+
+#card-container {
+    /* Styles for the main card container */
+    display: fixed;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-left: 22%; /* Adjust as needed */
+    width: 450px; /* Ajustez la largeur selon vos besoins */
+    height: 350px;
+}
+
+.additional-containers {
+    /* Styles for the additional flex containers */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left : 10%;
+}
+
+.additional-container {
+    /* Styles for each additional container */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px; /* Adjust as needed */
 }
 
 #numberDisplay {
