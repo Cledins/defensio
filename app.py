@@ -1,6 +1,9 @@
 import flask
 from flask import Flask, jsonify, after_this_request, abort, make_response
 from flask import render_template, request, send_file, redirect
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import inspect
+from sqlalchemy.orm import DeclarativeBase
 import re
 import os
 import sys
@@ -50,42 +53,64 @@ def read_card_data(file_path):
 
     return cards
 
-#Generate the cards only once
-cards = read_card_data('./static/cartes_action.tsv')
+def create_app():
+    basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
-CORS(app)
+    #Generate the cards only once
+    cards = read_card_data('./static/cartes_action.tsv')
 
-@app.route('/')
-def login():
-    return render_template("login.html")
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'data.sqlite')}"
+    db.init_app(app)
+    CORS(app)
 
-@app.route('/session')
-def session():
-    return render_template("index.html")
+    @app.route('/')
+    def login():
+        return render_template("login.html")
 
-@app.route('/identification', methods=['GET','POST'])
-def identification():
-    success=False
-    if request.method=='POST':
-        success=True
-        id = request.form['number']
-        print("Bienvenue ", id)
-    else:
-        number = request.args.get('number')
-        if number==None:
-            return redir
-        success=True
-        print("Je sais déjà que tu es : ",number)
-    resp = jsonify(success=success)
-    return render_template("index.html")
+    @app.route('/session')
+    def session():
+        return render_template("index.html")
 
-# Flask endpoint to serve card data
-@app.route('/api/cards')
-def get_cards():
-    print(cards)
-    return jsonify({'cards': cards})
-    
+    @app.route('/identification', methods=['GET','POST'])
+    def identification():
+        success=False
+        if request.method=='POST':
+            success=True
+            id = request.form['number']
+            print("Bienvenue ", id)
+        else:
+            number = request.args.get('number')
+            if number==None:
+                return redir
+            success=True
+            print("Je sais déjà que tu es : ",number)
+        resp = jsonify(success=success)
+        return render_template("index.html")
+
+    # Flask endpoint to serve card data
+    @app.route('/api/cards')
+    def get_cards():
+        return jsonify({'cards': cards}) 
+
+    from database.table import User, Question, UserResponse
+
+    with app.app_context():
+        meta = db.metadata
+        if not inspect(db.engine).has_table(User.__tablename__) or not inspect(db.engine).has_table(Question.__tablename__) or not inspect(db.engine).has_table(UserResponse.__tablename__):
+            db.create_all()
+
+
+    return app
+
+class Base(DeclarativeBase):
+   pass
+
+db = SQLAlchemy(model_class=Base)
+
+
 if __name__ == '__main__':
+    app = create_app()
     app.run(port=12345)
+
 
