@@ -83,6 +83,7 @@ def identification():
 # Flask endpoint to serve card data
 @app.route('/api/cards')
 def get_cards():
+    print(cards)
     return jsonify({'cards': cards})
     
 if __name__ == '__main__':
