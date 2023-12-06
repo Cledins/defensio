@@ -26,7 +26,7 @@ def convert_to_int(value):
 # Read TSV file and parse card data
 def read_card_data(file_path):
     cards = []
-    with open(file_path, 'r', newline='') as mycsv:
+    with open(file_path, 'r', newline='', encoding='utf-8') as mycsv:
         reader = csv.DictReader(mycsv, delimiter='\t')
         for idx, row in enumerate(reader):
             if row['Choix'] == '':
@@ -61,8 +61,8 @@ def create_app():
 
     app = Flask(__name__)
 
-    # app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'data.sqlite')}"
-    # db.init_app(app)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'data.sqlite')}"
+    db.init_app(app)
 
     CORS(app)
 
@@ -95,20 +95,20 @@ def create_app():
     def get_cards():
         return jsonify({'cards': cards}) 
 
-#     from database.table import User, Question, UserResponse
+    from database.table import User, Question, UserResponse
 
-#     with app.app_context():
-#         meta = db.metadata
-#         if not inspect(db.engine).has_table(User.__tablename__) or not inspect(db.engine).has_table(Question.__tablename__) or not inspect(db.engine).has_table(UserResponse.__tablename__):
-#             db.create_all()
+    with app.app_context():
+        meta = db.metadata
+        if not inspect(db.engine).has_table(User.__tablename__) or not inspect(db.engine).has_table(Question.__tablename__) or not inspect(db.engine).has_table(UserResponse.__tablename__):
+            db.create_all()
 
 
     return app
 
-# class Base(DeclarativeBase):
-#    pass
+class Base(DeclarativeBase):
+   pass
 
-# db = SQLAlchemy(model_class=Base)
+db = SQLAlchemy(model_class=Base)
 
 
 if __name__ == '__main__':

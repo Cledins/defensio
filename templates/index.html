@@ -11,23 +11,29 @@
     <body class="bg-gray-200">
         <div id="flex-container-1" class="flex-container">
                 <!-- Logo en haut à gauche -->
-                <img src="/static/logo.png" alt="Votre Logo" class="w-16 h-16">
+                <img src="/static/logo.png" alt="Votre Logo" class="w-12 h-12">
                 <!-- Numéro du groupe en haut à droite -->
-                <div id="numberDisplay" class="text-xl font-bold">Équipe #1</div>
+                <div id="numberDisplay" class="text-xl font-bold"></div>
            
         </div>
     </div>
 
     <div id="flex-container-2" class="flex-container">
         <!-- Jauges -->    
-        <img src="/static/C.png">
-        <div id="JaugeC">JaugeC</div>
-        <img src="/static/R.png">
-        <div id="JaugeR">JaugeR</div>
-        <img src="/static/I.png">
-        <div id="JaugeI">JaugeI</div>
-   
+        <div>
+            <img src="/static/C.png" alt="Jauge C">
+            <div id="JaugeC">JaugeC</div>
+        </div>
+        <div>
+            <img src="/static/R.png" alt="Jauge R">
+            <div id="JaugeR">JaugeR</div>
+        </div>
+        <div>
+            <img src="/static/I.png" alt="Jauge I">
+            <div id="JaugeI">JaugeI</div>
+        </div>
     </div>
+    
 
     <div id="flex-container-3" class="flex-container">
         <div id="card-container" class="flex-container">
@@ -55,7 +61,7 @@
         };
 
         var storedNumber = getCookie("number");
-        $("#numberDisplay").text("Group "+storedNumber);
+        $("#numberDisplay").text("Équipe "+storedNumber);
     </script>
    
    <script>
@@ -65,7 +71,6 @@
 
         const cardElement = document.createElement('div');
         cardElement.innerHTML = `
-            <img src="../static/carte.png" alt="${card.name}">
             <p>${card.name}</p>
             <button onclick="handleCardChoice('yes')">Oui</button>
             <button onclick="handleCardChoice('no')">Non</button>
