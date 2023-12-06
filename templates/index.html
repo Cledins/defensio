@@ -65,18 +65,27 @@
     </script>
    
    <script>
+  
     function renderCard(card) {
         const cardsContainer = document.getElementById('card-container');
         cardsContainer.innerHTML = ''; // Clear previous card
 
         const cardElement = document.createElement('div');
+        cardElement.id = 'card-content'; // Ajoutez un ID au conteneur de contenu de la carte
         cardElement.innerHTML = `
             <p>${card.name}</p>
-            <button onclick="handleCardChoice('yes')">Oui</button>
-            <button onclick="handleCardChoice('no')">Non</button>
         `;
         cardsContainer.appendChild(cardElement);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.id = 'button-container'; // Ajoutez un ID au conteneur de boutons
+        buttonContainer.innerHTML = `
+            <button class="action-button" onclick="handleCardChoice('yes')">Oui</button>
+            <button class="action-button" onclick="handleCardChoice('no')">Non</button>
+        `;
+        cardsContainer.appendChild(buttonContainer);
     }
+
 
     function handleCardChoice(choice) {
         // Handle the choice logic here
