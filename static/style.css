@@ -13,8 +13,8 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between; /* Aligner les éléments à chaque extrémité du conteneur */
-    width: 95%; /* Utiliser 90% de la largeur disponible */
-    padding: 10px; /* Ajouter un peu d'espace autour des éléments */
+    width: 95%; 
+    padding: 1%; 
 }
 
 
@@ -25,15 +25,14 @@ body {
     justify-content: space-around; /* Espacement équitable entre les éléments */
 }
 
-/* Styles pour chaque paire d'image et de texte */
 #flex-container-2 img {
-    max-width: 30%; /* Assurez-vous que toutes les images ne dépassent pas la largeur du conteneur */
+    max-width: 30%; 
     height: auto; /* Garantit que les proportions de l'image sont conservées */
 }
 
 #flex-container-2 div {
     text-align: center; /* Centre le texte */
-    margin-top: 10px; /* Ajoute un peu d'espace entre l'image et le texte */
+ 
 }
 
 
@@ -42,11 +41,10 @@ body {
 }
 
 #card-container {
-    /* Styles for the main card container */
     border: 1px solid #ccc;
     padding: 20px;
-    margin-left: 22%; /* Adjust as needed */
-    width: 450px; /* Ajustez la largeur selon vos besoins */
+    margin-left: 22%; 
+    width: 450px; 
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -54,26 +52,41 @@ body {
     justify-content: center; /* Centre les éléments verticalement dans le conteneur */
 }
 
-#card-container img {
-    /* Styles for the image inside card-container */
-    margin-left:30%;
+#card-container #card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
 }
 
 #card-container p {
-    /* Styles for the paragraph inside card-container */
-    margin-bottom: 10px; /* Espace en bas du paragraphe */
+    margin-bottom: 50%; /* Espace en bas du paragraphe */
+    font-size: 20px;
 }
 
 #card-container button {
-    /* Styles for the buttons inside card-container */
-    padding: 50px;
+    padding: 40px;
     margin: 5px; /* Espace autour des boutons */
     cursor: pointer;
 }
 
+#button-container {
+    display: flex;
+    gap: 10px; 
+    position: absolute;
+    bottom: 0;
+}
+
+#card-container .action-button {
+    padding: 50px;
+    margin: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif; 
+    font-size: 20px; 
+}
 
 .additional-containers {
-    /* Styles for the additional flex containers */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -81,7 +94,6 @@ body {
 }
 
 .additional-container {
-    /* Styles for each additional container */
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px; /* Adjust as needed */
@@ -97,3 +109,5 @@ img {
     width: 130px;
     height: auto;
 }
+
+/* à rendre responsive */
