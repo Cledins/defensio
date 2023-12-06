@@ -91,12 +91,12 @@ def create_app():
     def get_cards():
         return jsonify({'cards': cards}) 
 
-#     from database.table import User, Question, UserResponse
+    from database.table import User, Question, UserResponse
 
-#     with app.app_context():
-#         meta = db.metadata
-#         if not inspect(db.engine).has_table(User.__tablename__) or not inspect(db.engine).has_table(Question.__tablename__) or not inspect(db.engine).has_table(UserResponse.__tablename__):
-#             db.create_all()
+    with app.app_context():
+        meta = db.metadata
+        if not inspect(db.engine).has_table(User.__tablename__) or not inspect(db.engine).has_table(Question.__tablename__) or not inspect(db.engine).has_table(UserResponse.__tablename__):
+            db.create_all()
 
 
     return app
