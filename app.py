@@ -70,11 +70,7 @@ def create_app():
     def login():
         return render_template("login.html")
 
-    @app.route('/session')
-    def session():
-        return render_template("index.html")
-
-    @app.route('/identification', methods=['GET','POST'])
+    @app.route('/session', methods=['GET','POST'])
     def identification():
         success=False
         if request.method=='POST':
@@ -95,12 +91,12 @@ def create_app():
     def get_cards():
         return jsonify({'cards': cards}) 
 
-    from database.table import User, Question, UserResponse
+#     from database.table import User, Question, UserResponse
 
-    with app.app_context():
-        meta = db.metadata
-        if not inspect(db.engine).has_table(User.__tablename__) or not inspect(db.engine).has_table(Question.__tablename__) or not inspect(db.engine).has_table(UserResponse.__tablename__):
-            db.create_all()
+#     with app.app_context():
+#         meta = db.metadata
+#         if not inspect(db.engine).has_table(User.__tablename__) or not inspect(db.engine).has_table(Question.__tablename__) or not inspect(db.engine).has_table(UserResponse.__tablename__):
+#             db.create_all()
 
 
     return app
