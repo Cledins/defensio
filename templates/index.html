@@ -65,16 +65,7 @@
     </script>
    
    <script>
-    
-    // Initialize the variables
-    let R = 30;
-    let I = 30;
-    let C = 30;
-    let fireDefense = 0;
-    let earthDefense = 0;
-    let airDefense = 0;
-    let waterDefense = 0;
-    
+
     function renderCard(card) {
         const cardsContainer = document.getElementById('card-container');
         cardsContainer.innerHTML = ''; // Clear previous card
@@ -115,10 +106,14 @@
             earthDefense = parseInt(earthDefense) + currentCard.earth_defense;
             airDefense = parseInt(airDefense) + currentCard.air_defense;
             waterDefense = parseInt(waterDefense) + currentCard.water_defense;
+            updateMetrics(currentCard.effect_yes_R,currentCard.effect_yes_I,currentCard.effect_yes_C);
+            console.log(currentCard.effect_yes_R,currentCard.effect_yes_I,currentCard.effect_yes_C);
         } else if (choice === 'no') {
             R += currentCard.effect_no_R;
             I += currentCard.effect_no_I;
             C += currentCard.effect_no_C;
+            updateMetrics(currentCard.effect_no_R,currentCard.effect_no_I,currentCard.effect_no_C);
+            console.log(currentCard.effect_no_R,currentCard.effect_no_I,currentCard.effect_no_C);
         }
 
         console.log('After choice:', { R, I, C, fireDefense, earthDefense, airDefense, waterDefense });
@@ -138,32 +133,67 @@
         updateUI();
     }
 
+    function updateMetrics(r, i, c) {
+        const formData = {
+            jauge_i: i,
+            jauge_r: r,
+            jauge_c: c,
+            jauge_4: 0,
+        };
+
+        fetch(`/put-jauge/${storedNumber}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })}
 
 
 
+    function updateUI() {
+        // Update gauge values
+        document.getElementById('JaugeR').innerText = `Jauge R: ${R}`;
+        document.getElementById('JaugeI').innerText = `Jauge I: ${I}`;
+        document.getElementById('JaugeC').innerText = `Jauge C: ${C}`;
 
-function updateUI() {
-    // Update gauge values
-    document.getElementById('JaugeR').innerText = `Jauge R: ${R}`;
-    document.getElementById('JaugeI').innerText = `Jauge I: ${I}`;
-    document.getElementById('JaugeC').innerText = `Jauge C: ${C}`;
+        // Update defense values
+        const defenseFeu = parseInt(fireDefense);
+        const defenseTerre = parseInt(earthDefense);
+        const defenseAir = parseInt(airDefense);
+        const defenseEau = parseInt(waterDefense);
 
-    // Update defense values
-    const defenseFeu = parseInt(fireDefense);
-    const defenseTerre = parseInt(earthDefense);
-    const defenseAir = parseInt(airDefense);
-    const defenseEau = parseInt(waterDefense);
-
-    document.getElementsByClassName('additional-container')[0].innerText = `Défense feu: ${parseInt(defenseFeu)}`;
-    document.getElementsByClassName('additional-container')[1].innerText = `Défense terre: ${parseInt(defenseTerre)}`;
-    document.getElementsByClassName('additional-container')[2].innerText = `Défense air: ${parseInt(defenseAir)}`;
-    document.getElementsByClassName('additional-container')[3].innerText = `Défense eau: ${parseInt(defenseEau)}`;
-}
-
-
-
+        document.getElementsByClassName('additional-container')[0].innerText = `Défense feu: ${parseInt(defenseFeu)}`;
+        document.getElementsByClassName('additional-container')[1].innerText = `Défense terre: ${parseInt(defenseTerre)}`;
+        document.getElementsByClassName('additional-container')[2].innerText = `Défense air: ${parseInt(defenseAir)}`;
+        document.getElementsByClassName('additional-container')[3].innerText = `Défense eau: ${parseInt(defenseEau)}`;
+    }
+        
+    // Initialize the variables
+    let R = 30;
+    let I = 30;
+    let C = 30;
+    let fireDefense = 0;
+    let earthDefense = 0;
+    let airDefense = 0;
+    let waterDefense = 0;
     let currentCardIndex = 0;
     let data;
+
+    fetch('/get-jauge/'+storedNumber)
+        .then(response => response.json())
+        .then(apidata => {
+            R=apidata.jauge_r;
+            I=apidata.jauge_i;
+            C=apidata.jauge_c;
+            //add defenses to the stored data
+            
+            updateUI();
+        });
 
     fetch('/api/cards')
         .then(response => response.json())
