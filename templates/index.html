@@ -22,21 +22,22 @@
         <!-- Jauges -->    
         <div>
             <img src="/static/C.png" alt="Jauge C">
-            <div id="JaugeC">JaugeC</div>
+            <div id="JaugeC"></div>
         </div>
         <div>
             <img src="/static/R.png" alt="Jauge R">
-            <div id="JaugeR">JaugeR</div>
+            <div id="JaugeR"></div>
         </div>
         <div>
             <img src="/static/I.png" alt="Jauge I">
-            <div id="JaugeI">JaugeI</div>
+            <div id="JaugeI"></div>
         </div>
     </div>
     
 
     <div id="flex-container-3" class="flex-container">
         <div id="card-container" class="flex-container">
+    
         </div>
 
         <div class="additional-containers">
@@ -157,9 +158,9 @@
 
     function updateUI() {
         // Update gauge values
-        document.getElementById('JaugeR').innerText = `Jauge R: ${R}`;
-        document.getElementById('JaugeI').innerText = `Jauge I: ${I}`;
-        document.getElementById('JaugeC').innerText = `Jauge C: ${C}`;
+        document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
+        document.getElementById('JaugeI').innerText = `Popularité : ${I}`;
+        document.getElementById('JaugeC').innerText = `Ressources : ${C}`;
 
         // Update defense values
         const defenseFeu = parseInt(fireDefense);
