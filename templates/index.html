@@ -79,6 +79,32 @@
         `;
         cardsContainer.appendChild(cardContent);
 
+        // Create a container for columns
+        const columnsContainer = document.createElement('div');
+        columnsContainer.id = 'columns-container';
+        cardsContainer.appendChild(columnsContainer);
+
+        // Create left column
+        const leftColumn = document.createElement('div');
+        leftColumn.id = 'left-column';
+        leftColumn.innerHTML = `
+            <p>Si oui, la diplomatie : ${card.effect_yes_R}</p>
+            <p>Si oui, la popularité : ${card.effect_yes_I}</p>
+            <p>Si oui, les ressources : ${card.effect_yes_C}</p>
+        `;
+        columnsContainer.appendChild(leftColumn);
+
+        // Create right column
+        const rightColumn = document.createElement('div');
+        rightColumn.id = 'right-column';
+        rightColumn.innerHTML = `
+            <p>Défense feu : + ${card.fire_defense}</p>
+            <p>Défense terre : + ${card.earth_defense}</p>
+            <p>Défense air : + ${card.air_defense}</p>
+            <p>Défense eau : + ${card.water_defense}</p>
+        `;
+        columnsContainer.appendChild(rightColumn);
+
         // Create a container for buttons
         const buttonContainer = document.createElement('div');
         buttonContainer.id = 'button-container';
@@ -91,6 +117,8 @@
         // Update UI elements
         updateUI();
     }
+
+
 
     function handleCardChoice(choice) {
         // Get the current card

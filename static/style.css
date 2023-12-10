@@ -41,10 +41,9 @@ body {
 }
 
 #card-container {
-    border: 1px solid #ccc;
     padding: 20px;
     margin-left: 22%; 
-    width: 450px; 
+    width: 550px; 
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -63,11 +62,35 @@ body {
 #card-container p {
     margin-bottom: 20px; /* Ajustez l'espace en bas du paragraphe */
     font-size: 20px;
+    font-size: 1.2rem;
 }
 
+#columns-container {
+    display: flex;
+    justify-content: space-between;
+    width : 100%
+}
+
+#left-column,
+#right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1.2;
+}
+
+#left-column p,
+#right-column p {
+    margin-bottom: 5%;
+    font-size: 1rem;
+    line-height:0%;
+}
+
+
 #card-container button {
-    padding: 10px;
-    margin: 5px; /* Espace autour des boutons */
+    padding: 5%;
+    margin: 5%; /* Espace autour des boutons */
     cursor: pointer;
 }
 
