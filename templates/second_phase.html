@@ -36,24 +36,71 @@
         </div>
     </div>
     
-        <!-- Waves Container -->
-        <div class="waves-container">
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(80, 194, 215, 0.7)" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(80, 194, 215, 0.5)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(80, 194, 215, 0.3)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#50C2D7" />
-                </g>
-            </svg>
+    <div id="flex-container-3" class="flex-container">
+        <div id="card-container" class="flex-container">
+    
         </div>
-        <!-- Waves end -->
+
+        <div class="additional-containers">
+            <!-- Additional flex containers (4 in this example) -->
+            <div class="additional-container">Défense feu</div>
+            <div class="additional-container">Défense terre</div>
+            <div class="additional-container">Défense air</div>
+            <div class="additional-container">Défense eau</div>
+        </div>
     </div>
+
+    <script>
+        // Set the duration of the timer in seconds
+        const timerDuration = 2; // Change this value to the desired duration
+    
+        let countdown = timerDuration;
+        let countdownInterval;
+    
+        function startTimer() {
+        countdownInterval = setInterval(updateTimer, 1000);
+        }
+    
+        function updateTimer() {
+        const timerElement = document.getElementById('countdown');
+    
+        if (countdown > 0) {
+            countdown--;
+            timerElement.textContent = countdown;
+        } else {
+            clearInterval(countdownInterval);
+            // Timer is complete, transition to another page
+            window.location.href = '/debrief2'; // Change the URL to your second phase page
+        }
+        }
+    
+        // Call startTimer() when you want to start the timer
+        // For example, call it when the 1st phase begins
+        startTimer();
+    
+    </script>
+
+
+    <script>
+        fetch('/get-jauge/'+storedNumber)
+            .then(response => response.json())
+            .then(apidata => {
+                R=apidata.jauge_r;
+                I=apidata.jauge_i;
+                C=apidata.jauge_c;
+                //add defenses to the stored data
+                
+                updateUI();
+            });
+
+        fetch('/api/cards')
+            .then(response => response.json())
+            .then(apidata => {
+                data = apidata;
+                renderCard(data.cards[currentCardIndex]);
+            });
         
+    </script>
 
 </body>
 </html>

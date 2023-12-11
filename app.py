@@ -78,7 +78,17 @@ def create_app():
     @app.route('/debrief1')
     def debrief1():
         return render_template("debrief1.html")
-
+    
+    #phase2
+    @app.route('/second_phase')
+    def second_phase():
+        return render_template("second_phase.html")
+    
+    #débrief2
+    @app.route('/debrief2')
+    def debrief1():
+        return render_template("debrief2.html")
+    
     @app.route('/session', methods=['GET','POST'])
     def identification():
         success=False
