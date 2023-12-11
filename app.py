@@ -89,7 +89,7 @@ def create_app():
     def debrief2():
         return render_template("debrief2.html")
     
-    @app.route('/session', methods=['GET','POST'])
+    @app.route('/session', methods=['POST'])
     def identification():
         success=False
         if request.method=='POST':
@@ -108,16 +108,8 @@ def create_app():
                 )
                 db.session.add(nouvelles_metrics)
                 db.session.commit()
-
-                print("Bienvenue ", id)
             except:
                 None
-        else:
-            number = request.args.get('number')
-            if number==None:
-                return redir
-            success=True
-            print("Je sais déjà que tu es : ",number)
         resp = jsonify(success=success)
         return render_template("index.html")
 
