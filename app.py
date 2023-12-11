@@ -33,7 +33,7 @@ def read_card_data(file_path):
     with open(file_path, 'r', newline='', encoding='utf-8') as mycsv:
         reader = csv.DictReader(mycsv, delimiter='\t')
         for idx, row in enumerate(reader):
-            if row['Choix'] == '':
+            if row['Oui_R'] == '':
                 break
 
             card = {
