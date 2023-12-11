@@ -86,7 +86,7 @@ def create_app():
     
     #débrief2
     @app.route('/debrief2')
-    def debrief1():
+    def debrief2():
         return render_template("debrief2.html")
     
     @app.route('/session', methods=['GET','POST'])

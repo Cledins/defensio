@@ -80,27 +80,6 @@
     
     </script>
 
-
-    <script>
-        fetch('/get-jauge/'+storedNumber)
-            .then(response => response.json())
-            .then(apidata => {
-                R=apidata.jauge_r;
-                I=apidata.jauge_i;
-                C=apidata.jauge_c;
-                //add defenses to the stored data
-                
-                updateUI();
-            });
-
-        fetch('/api/cards')
-            .then(response => response.json())
-            .then(apidata => {
-                data = apidata;
-                renderCard(data.cards[currentCardIndex]);
-            });
-        
-    </script>
-
+    
 </body>
 </html>
