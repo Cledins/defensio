@@ -94,6 +94,7 @@ def create_app():
         success=False
         if request.method=='POST':
             try:
+                id = request.json['number']
                 nouvelles_metrics = UserMetrics(
                     id=int(id),
                     jauge_i=30,
