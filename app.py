@@ -94,6 +94,7 @@ def create_app():
         success=False
         if request.method=='POST':
             try:
+                id = request.form.get('number')
                 nouvelles_metrics = UserMetrics(
                     id=int(id),
                     jauge_i=30,
@@ -131,7 +132,6 @@ def create_app():
 
     @app.route('/get-jauge/<user>')
     def getjauge(user):
-        print("non",inspect(db.engine).has_table(UserMetrics.__tablename__) )
         userMetrics = db.session.query(UserMetrics).get(user)
         return jsonify({'jauge_c': userMetrics.jauge_c, 
                         'jauge_i': userMetrics.jauge_i, 
