@@ -69,7 +69,7 @@
    
    <script>
     // Set the duration of the timer in seconds
-    const timerDuration = 2; // Change this value to the desired duration
+    const timerDuration = 200; // Change this value to the desired duration
 
     let countdown = timerDuration;
     let countdownInterval;
@@ -167,13 +167,13 @@
             earthDefense = parseInt(earthDefense) + currentCard.earth_defense;
             airDefense = parseInt(airDefense) + currentCard.air_defense;
             waterDefense = parseInt(waterDefense) + currentCard.water_defense;
-            updateMetrics(currentCard.effect_yes_R,currentCard.effect_yes_I,currentCard.effect_yes_C);
+            updateMetrics(currentCard.effect_yes_R,currentCard.effect_yes_I,currentCard.effect_yes_C,currentCard.water_defense,currentCard.earth_defense,currentCard.fire_defense,currentCard.air_defense);
             console.log(currentCard.effect_yes_R,currentCard.effect_yes_I,currentCard.effect_yes_C);
         } else if (choice === 'no') {
             R += currentCard.effect_no_R;
             I += currentCard.effect_no_I;
             C += currentCard.effect_no_C;
-            updateMetrics(currentCard.effect_no_R,currentCard.effect_no_I,currentCard.effect_no_C);
+            updateMetrics(currentCard.effect_no_R,currentCard.effect_no_I,currentCard.effect_no_C,0,0,0,0);
             console.log(currentCard.effect_no_R,currentCard.effect_no_I,currentCard.effect_no_C);
         }
 
@@ -194,14 +194,18 @@
         updateUI();
     }
 
-    function updateMetrics(r, i, c) {
+    function updateMetrics(r, i, c, wd, ed, fd, ad) {
         const formData = {
             jauge_i: i,
             jauge_r: r,
             jauge_c: c,
             jauge_4: 0,
+            water_defense: wd,
+            earth_defense: ed,
+            fire_defense: fd,
+            air_defense: ad
         };
-
+        console.log(formData);
         fetch(`/put-jauge/${storedNumber}`, {
             method: 'PUT',
             headers: {
@@ -251,8 +255,13 @@
             R=apidata.jauge_r;
             I=apidata.jauge_i;
             C=apidata.jauge_c;
+            airDefense=apidata.air_defense;
+            waterDefense=apidata.water_defense;
+            fireDefense=apidata.fire_defense;
+            earthDefense=apidata.earth_defense;
+
             //add defenses to the stored data
-            
+            console.log(apidata);
             updateUI();
         });
 

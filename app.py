@@ -93,19 +93,24 @@ def create_app():
     def identification():
         success=False
         if request.method=='POST':
-            success=True
-            id = request.form['number']
-            nouvelles_metrics = UserMetrics(
-                id=int(id),
-                jauge_i=30,
-                jauge_r=30,
-                jauge_c=30,
-                jauge_4=30
-            )
-            #db.session.add(nouvelles_metrics)
-            #db.session.commit()
+            try:
+                nouvelles_metrics = UserMetrics(
+                    id=int(id),
+                    jauge_i=30,
+                    jauge_r=30,
+                    jauge_c=30,
+                    jauge_4=30, 
+                    air_defense=0,
+                    water_defense=0,
+                    earth_defense=0,
+                    fire_defense=0
+                )
+                db.session.add(nouvelles_metrics)
+                db.session.commit()
 
-            print("Bienvenue ", id)
+                print("Bienvenue ", id)
+            except:
+                None
         else:
             number = request.args.get('number')
             if number==None:
@@ -122,16 +127,20 @@ def create_app():
 
     with app.app_context():
         meta = db.metadata
-        #if not inspect(db.engine).has_table(UserMetrics.__tablename__):
         db.create_all()
-          #  print("oui", inspect(db.engine))
-        print("non",inspect(db.engine).has_table(UserMetrics.__tablename__) )
 
     @app.route('/get-jauge/<user>')
     def getjauge(user):
         print("non",inspect(db.engine).has_table(UserMetrics.__tablename__) )
         userMetrics = db.session.query(UserMetrics).get(user)
-        return jsonify({'jauge_c': userMetrics.jauge_c, 'jauge_i': userMetrics.jauge_i, 'jauge_r':userMetrics.jauge_r, 'jauge_4':userMetrics.jauge_4})
+        return jsonify({'jauge_c': userMetrics.jauge_c, 
+                        'jauge_i': userMetrics.jauge_i, 
+                        'jauge_r':userMetrics.jauge_r, 
+                        'jauge_4':userMetrics.jauge_4, 
+                        'water_defense':userMetrics.water_defense, 
+                        'earth_defense': userMetrics.earth_defense, 
+                        'air_defense':userMetrics.air_defense, 
+                        'fire_defense': userMetrics.fire_defense})
 
     @app.route('/put-jauge/<user>', methods=['PUT'])
     def putjauge(user):
@@ -144,6 +153,10 @@ def create_app():
             userMetrics.jauge_r += data.get('jauge_r', 0)
             userMetrics.jauge_c += data.get('jauge_c', 0)
             userMetrics.jauge_4 += data.get('jauge_4', 0)
+            userMetrics.water_defense += data.get('water_defense', 0)
+            userMetrics.earth_defense += data.get('earth_defense', 0)
+            userMetrics.fire_defense += data.get('fire_defense', 0)
+            userMetrics.air_defense += data.get('air_defense', 0)
 
             db.session.commit()
 
@@ -160,7 +173,10 @@ def create_app():
             userMetrics.jauge_r = 30
             userMetrics.jauge_c = 30
             userMetrics.jauge_4 = 30
-
+            userMetrics.air_defense=0
+            userMetrics.water_defense=0
+            userMetrics.earth_defense=0
+            userMetrics.fire_defense=0
             db.session.commit()
 
             return jsonify({'message': 'UserMetrics updated successfully'})
