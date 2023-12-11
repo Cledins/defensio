@@ -17,6 +17,11 @@ body {
     padding: 1%; 
 }
 
+#timer {
+    font-size: 18px;
+    margin: 10px;
+  }
+  
 
 /* Flex container pour aligner les images et les textes */
 #flex-container-2 {

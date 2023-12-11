@@ -74,6 +74,11 @@ def create_app():
     def login():
         return render_template("login.html")
 
+    #débrief1
+    @app.route('/debrief1')
+    def debrief1():
+        return render_template("debrief1.html")
+
     @app.route('/session', methods=['GET','POST'])
     def identification():
         success=False

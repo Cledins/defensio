@@ -12,6 +12,8 @@
         <div id="flex-container-1" class="flex-container">
                 <!-- Logo en haut à gauche -->
                 <img src="/static/logo.png" alt="Votre Logo" class="w-12 h-12">
+                <!-- Timer -->
+                <div id="timer">Timer : <span id="countdown"></span></div>
                 <!-- Numéro du groupe en haut à droite -->
                 <div id="numberDisplay" class="text-xl font-bold"></div>
            
@@ -65,6 +67,36 @@
         $("#numberDisplay").text("Équipe "+storedNumber);
     </script>
    
+   <script>
+    // Set the duration of the timer in seconds
+    const timerDuration = 60; // Change this value to the desired duration
+
+    let countdown = timerDuration;
+    let countdownInterval;
+
+    function startTimer() {
+    countdownInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+    const timerElement = document.getElementById('countdown');
+
+    if (countdown > 0) {
+        countdown--;
+        timerElement.textContent = countdown;
+    } else {
+        clearInterval(countdownInterval);
+        // Timer is complete, transition to another page
+        window.location.href = '/debrief1'; // Change the URL to your second phase page
+    }
+    }
+
+    // Call startTimer() when you want to start the timer
+    // For example, call it when the 1st phase begins
+    startTimer();
+
+   </script>
+
    <script>
 
     function renderCard(card) {

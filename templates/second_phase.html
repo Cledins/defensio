@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <title>Phase 2</title>
+</head>
+<body>
+
+    <body class="bg-gray-200">
+        <div id="flex-container-1" class="flex-container">
+                <!-- Logo en haut à gauche -->
+                <img src="/static/logo.png" alt="Votre Logo" class="w-12 h-12">
+                <!-- Timer -->
+                <div id="timer">Timer : <span id="countdown"></span></div>
+                <!-- Numéro du groupe en haut à droite -->
+                <div id="numberDisplay" class="text-xl font-bold"></div>
+           
+        </div>
+    </div>
+    
+    <div id="flex-container-2" class="flex-container">
+        <!-- Jauges -->    
+        <div>
+            <img src="/static/C.png" alt="Jauge C">
+            <div id="JaugeC"></div>
+        </div>
+        <div>
+            <img src="/static/R.png" alt="Jauge R">
+            <div id="JaugeR"></div>
+        </div>
+        <div>
+            <img src="/static/I.png" alt="Jauge I">
+            <div id="JaugeI"></div>
+        </div>
+    </div>
+    
+        <!-- Waves Container -->
+        <div class="waves-container">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(80, 194, 215, 0.7)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(80, 194, 215, 0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(80, 194, 215, 0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#50C2D7" />
+                </g>
+            </svg>
+        </div>
+        <!-- Waves end -->
+    </div>
+        
+
+</body>
+</html>
