@@ -3,7 +3,6 @@ import datetime
 from app import db
 
 from sqlalchemy import Boolean, DateTime, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
 
 class UserMetrics(db.Model):
     id = db.Column(db.Integer, primary_key=True)

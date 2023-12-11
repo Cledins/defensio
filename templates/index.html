@@ -69,7 +69,7 @@
    
    <script>
     // Set the duration of the timer in seconds
-    const timerDuration = 200; // Change this value to the desired duration
+    const timerDuration = 20; // Change this value to the desired duration
 
     let countdown = timerDuration;
     let countdownInterval;
@@ -154,7 +154,7 @@
 
     function handleCardChoice(choice) {
         // Get the current card
-        const currentCard = data.cards[currentCardIndex];
+        const currentCard = cards[currentCardIndex];
 
         console.log('Before choice:', { R, I, C, fireDefense, earthDefense, airDefense, waterDefense });
 
@@ -183,8 +183,8 @@
         currentCardIndex++;
 
         // Render the next card data
-        if (currentCardIndex < data.cards.length) {
-            renderCard(data.cards[currentCardIndex]);
+        if (currentCardIndex < cards.length) {
+            renderCard(cards[currentCardIndex]);
         } else {
             // All cards have been displayed, you may want to handle this case
             console.log("All cards have been displayed");
@@ -247,7 +247,8 @@
     let airDefense = 0;
     let waterDefense = 0;
     let currentCardIndex = 0;
-    let data;
+    let data_unshuffled;
+    let cards;
 
     fetch('/get-jauge/'+storedNumber)
         .then(response => response.json())
@@ -268,8 +269,12 @@
     fetch('/api/cards')
         .then(response => response.json())
         .then(apidata => {
-            data = apidata;
-            renderCard(data.cards[currentCardIndex]);
+            data_unshuffled = apidata;
+            cards = data_unshuffled.cards
+                .map(value => ({ value, sort: Math.random() }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value)
+            renderCard(cards[currentCardIndex]);
         });
 </script>
 
