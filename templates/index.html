@@ -69,7 +69,7 @@
    
    <script>
     // Set the duration of the timer in seconds
-    const timerDuration = 20; // Change this value to the desired duration
+    const timerDuration = 800; // Change this value to the desired duration
 
     let countdown = timerDuration;
     let countdownInterval;
@@ -120,9 +120,10 @@
         const leftColumn = document.createElement('div');
         leftColumn.id = 'left-column';
         leftColumn.innerHTML = `
-            <p>Si oui, la diplomatie : ${card.effect_yes_R}</p>
-            <p>Si oui, la popularité : ${card.effect_yes_I}</p>
             <p>Si oui, les ressources : ${card.effect_yes_C}</p>
+            <p>Si oui, la diplomatie : ${card.effect_yes_R}</p>     
+            <p>Si oui, la popularité : ${card.effect_yes_I}</p>
+            
         `;
         columnsContainer.appendChild(leftColumn);
 
@@ -187,11 +188,44 @@
             renderCard(cards[currentCardIndex]);
         } else {
             // All cards have been displayed, you may want to handle this case
+            showConfirmationMessage();
             console.log("All cards have been displayed");
         }
 
         // Update UI elements
         updateUI();
+    }
+
+    function showConfirmationMessage() {
+    // Create a container div for the message and button
+    const confirmationContainer = document.createElement('div');
+    confirmationContainer.id = 'confirmation-container';
+
+    // Add the message
+    const confirmationMessage = document.createElement('p');
+    confirmationMessage.textContent = 'Vous avez tiré toutes les cartes. Il est temps pour vous donc de passer au débrief 1 !';
+    confirmationContainer.appendChild(confirmationMessage);
+
+    // Add a button to confirm and navigate to the next page
+    const confirmButton = document.createElement('button');
+    confirmButton.textContent = 'Confirm';
+    confirmButton.addEventListener('click', function () {
+        // Redirect to the next page
+        window.location.href = '/debrief1'; // Change the URL to your second phase page
+    });
+    confirmationContainer.appendChild(confirmButton);
+
+    // Style the container
+    confirmationContainer.style.position = 'fixed';
+    confirmationContainer.style.top = '0';
+    confirmationContainer.style.left = '0';
+    confirmationContainer.style.width = '100%';
+    confirmationContainer.style.background = '#f8d7da'; // Add your preferred background color
+    confirmationContainer.style.padding = '10px';
+    confirmationContainer.style.textAlign = 'center';
+
+    // Append the container to the body
+    document.body.appendChild(confirmationContainer);
     }
 
     function updateMetrics(r, i, c, wd, ed, fd, ad) {
