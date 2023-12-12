@@ -40,16 +40,17 @@ body {
  
 }
 
-
 #flex-container-3 {
-    display: flex;
+    display : flex;
+    flex-direction : column;
 }
-
 .additional-containers {
+    padding: 20px;
+    width: 48%; /* Adjust the width as needed */
+    height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-left : 10%;
+    align-items: center; /* Center the elements horizontally in the container */
 }
 
 .additional-container {
@@ -57,6 +58,13 @@ body {
     padding: 10px;
     margin-bottom: 10px; /* Adjust as needed */
 }
+
+#flex-container-3 {
+    display : flex;
+    flex-direction : column;
+}
+
+/* Add more styling if necessary */
 
 #numberDisplay {
     font-size: 1.6rem;
@@ -69,3 +77,19 @@ img {
     height: auto;
 }
 
+/* à rendre responsive */
+
+/* Style for the floating message */
+.floating-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hide the message */
+    z-index: 999; /* Ensure it's above other elements */
+}

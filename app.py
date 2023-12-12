@@ -42,9 +42,13 @@ def read_card_data(file_path):
                 'effect_yes_R':  convert_to_int(row['Oui_R']),
                 'effect_yes_C': convert_to_int(row['Oui_C']),
                 'effect_yes_I': convert_to_int(row['Oui_I ']),
+                'effect_yes_D': convert_to_int(row['Oui_D']),
+            
                 'effect_no_R': convert_to_int(row['Non_R']),
                 'effect_no_C': convert_to_int(row['Non_C ']),
                 'effect_no_I': convert_to_int(row['Non_I ']),
+                'effect_no_D': convert_to_int(row['Non_D']),
+
                 'fire_defense': convert_to_int(row['feu']),
                 'earth_defense': convert_to_int(row['terre']),
                 'air_defense': convert_to_int(row['air']),
@@ -100,7 +104,7 @@ def create_app():
                     jauge_i=30,
                     jauge_r=30,
                     jauge_c=30,
-                    jauge_4=30, 
+                    jauge_d=0, 
                     air_defense=0,
                     water_defense=0,
                     earth_defense=0,
@@ -128,7 +132,7 @@ def create_app():
         return jsonify({'jauge_c': userMetrics.jauge_c, 
                         'jauge_i': userMetrics.jauge_i, 
                         'jauge_r':userMetrics.jauge_r, 
-                        'jauge_4':userMetrics.jauge_4, 
+                        'jauge_d':userMetrics.jauge_d, 
                         'water_defense':userMetrics.water_defense, 
                         'earth_defense': userMetrics.earth_defense, 
                         'air_defense':userMetrics.air_defense, 
@@ -144,7 +148,7 @@ def create_app():
             userMetrics.jauge_i += data.get('jauge_i', 0)
             userMetrics.jauge_r += data.get('jauge_r', 0)
             userMetrics.jauge_c += data.get('jauge_c', 0)
-            userMetrics.jauge_4 += data.get('jauge_4', 0)
+            userMetrics.jauge_d += data.get('jauge_d', 0)
             userMetrics.water_defense += data.get('water_defense', 0)
             userMetrics.earth_defense += data.get('earth_defense', 0)
             userMetrics.fire_defense += data.get('fire_defense', 0)
@@ -164,7 +168,7 @@ def create_app():
             userMetrics.jauge_i = 30
             userMetrics.jauge_r = 30
             userMetrics.jauge_c = 30
-            userMetrics.jauge_4 = 30
+            userMetrics.jauge_d = 0
             userMetrics.air_defense=0
             userMetrics.water_defense=0
             userMetrics.earth_defense=0

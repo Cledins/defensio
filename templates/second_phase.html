@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    
     <body class="bg-gray-200">
         <div id="flex-container-1" class="flex-container">
                 <!-- Logo en haut à gauche -->
@@ -37,10 +38,21 @@
     </div>
     
     <div id="flex-container-3" class="flex-container">
-        <div id="card-container" class="flex-container">
+        <div id ="flex-container-4" class="flex-container">
+            <div id="dialog-container" class="flex-container">
+                <label for="exchanges">Nombre d'échanges : </label>
+                <input type="number" id="exchanges" min="0">
+        
+                <label for="donations">Donations : </label>
+                <input type="number" id="donations" min="0">
+        
+                <label for="received">Reçus : </label>
+                <input type="number" id="received" min="0">
+        
+                <button onclick="submitInputs()">Soumettre</button>
+            </div>
     
         </div>
-
         <div class="additional-containers">
             <!-- Additional flex containers (4 in this example) -->
             <div class="additional-container">Défense feu</div>
@@ -50,23 +62,20 @@
         </div>
     </div>
 
-    <script>
-        function getCookie(name) {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            if (cookie.indexOf(name + "=") === 0) {
-            return cookie.substring(name.length + 1);
-            }
-        }
-        return "";
-        };
-        var storedNumber = getCookie("number");
-    </script>
+    
+
+        <!-- Floating message container -->
+    <div id="floating-message" class="floating-message">
+        <p>Le dragon éternue, créant une vague de flammes traversant l'empire.</p>
+        <button onclick="confirmMessage()">Confirm</button>
+    </div>
+
+    
+
 
     <script>
         // Set the duration of the timer in seconds
-        const timerDuration = 20; // Change this value to the desired duration
+        const timerDuration = 500; // Change this value to the desired duration
     
         let countdown = timerDuration;
         let countdownInterval;
@@ -83,38 +92,118 @@
             timerElement.textContent = countdown;
         } else {
             clearInterval(countdownInterval);
-            // Timer is complete, transition to another page
-            window.location.href = '/debrief2'; // Change the URL to your second phase page
+            // Rajouter deuxième cataclysme 
         }
         }
     
-        // Call startTimer() when you want to start the timer
-        // For example, call it when the 1st phase begins
         startTimer();
+
         
-        //appel get pour récupérer les données stockées
+    </script>
+    
+    <script>
 
-        let R = 30;
-        let I = 30;
-        let C = 30;
-        let fireDefense = 0;
-        let earthDefense = 0;
-        let airDefense = 0;
-        let waterDefense = 0;
 
-        fetch('/get-jauge/'+storedNumber)
-        .then(response => response.json())
-        .then(apidata => {
-            R=apidata.jauge_r;
-            I=apidata.jauge_i;
-            C=apidata.jauge_c;
-            airDefense=apidata.air_defense;
-            waterDefense=apidata.water_defense;
-            fireDefense=apidata.fire_defense;
-            earthDefense=apidata.earth_defense;
-        });
+    function updateUI() {
+        // Update gauge values
+        document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
+        document.getElementById('JaugeI').innerText = `Popularité : ${I}`;
+        document.getElementById('JaugeC').innerText = `Ressources : ${C}`;
+
+        // Update defense values
+        const defenseFeu = parseInt(fireDefense);
+        const defenseTerre = parseInt(earthDefense);
+        const defenseAir = parseInt(airDefense);
+        const defenseEau = parseInt(waterDefense);
+
+        document.getElementsByClassName('additional-container')[0].innerText = `Défense feu: ${parseInt(defenseFeu)}`;
+        document.getElementsByClassName('additional-container')[1].innerText = `Défense terre: ${parseInt(defenseTerre)}`;
+        document.getElementsByClassName('additional-container')[2].innerText = `Défense air: ${parseInt(defenseAir)}`;
+        document.getElementsByClassName('additional-container')[3].innerText = `Défense eau: ${parseInt(defenseEau)}`;
+    }
+ 
     </script>
 
-    
+    <script>
+   
+    // ... (rest of your script)
+
+        // Function to parse URL parameters
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Get the transferred data from the URL
+        var transferredData = {
+            R: getParameterByName('R'),
+            I: getParameterByName('I'),
+            C: getParameterByName('C'),
+            fireDefense: getParameterByName('fireDefense'),
+            earthDefense: getParameterByName('earthDefense'),
+            airDefense: getParameterByName('airDefense'),
+            waterDefense: getParameterByName('waterDefense')
+        };
+
+        // Update HTML elements with transferred data
+        document.getElementById('JaugeR').innerText = 'Diplomatie : ' + transferredData.R;
+        document.getElementById('JaugeI').innerText = 'Popularité : ' + transferredData.I;
+        document.getElementById('JaugeC').innerText = 'Ressources : ' + transferredData.C;
+
+        // Additional elements (you may need to update these based on your structure)
+        document.getElementsByClassName('additional-container')[0].innerText = 'Défense feu: ' + transferredData.fireDefense;
+        document.getElementsByClassName('additional-container')[1].innerText = 'Défense terre: ' + transferredData.earthDefense;
+        document.getElementsByClassName('additional-container')[2].innerText = 'Défense air: ' + transferredData.airDefense;
+        document.getElementsByClassName('additional-container')[3].innerText = 'Défense eau: ' + transferredData.waterDefense;
+    </script>
+
+<!-- <script>
+     function submitInputs() {
+        // Get values from input elements
+        const exchangesValue = parseInt(document.getElementById('exchanges').value) || 0;
+        const donationsValue = parseInt(document.getElementById('donations').value) || 0;
+        const receivedValue = parseInt(document.getElementById('received').value) || 0;
+
+        // Update metrics based on input values
+        updateMetricsForInputs(exchangesValue, donationsValue, receivedValue);
+
+        // You can send the values to the server using fetch or update the UI accordingly
+    }
+
+    function updateMetricsForInputs(exchanges, donations, received) {
+        // Update metrics based on input values
+        R += 5 * exchanges;
+        C += 5 * received;
+        I += 10 * donations;
+        C -= 10 * donations;
+        I -= 2 * received;
+
+        // Update UI elements
+        updateUI();
+    }
+
+</script> -->
+
+<script>
+    // Function to confirm the message and decrease fire_defense by 5
+    function confirmMessage() {
+        // Decrease fire_defense by 5 (adjust the variable names based on your code)
+        defenseFeu -= 5;
+
+        // Hide the floating message
+        document.getElementById('floating-message').style.display = 'none';
+    }
+
+    // Show the floating message when the page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('floating-message').style.display = 'block';
+    });
+</script>
+
 </body>
 </html>
