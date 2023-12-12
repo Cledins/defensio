@@ -102,7 +102,18 @@
     </script>
     
     <script>
+    function getCookie(name) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(name + "=") === 0) {
+            return cookie.substring(name.length + 1);
+            }
+        }
+        return "";
+        };
 
+    var storedNumber = getCookie("number");
 
     function updateUI() {
         // Update gauge values
@@ -121,45 +132,22 @@
         document.getElementsByClassName('additional-container')[2].innerText = `Défense air: ${parseInt(defenseAir)}`;
         document.getElementsByClassName('additional-container')[3].innerText = `Défense eau: ${parseInt(defenseEau)}`;
     }
+
+    fetch('/get-jauge/'+storedNumber)
+        .then(response => response.json())
+        .then(apidata => {
+            R=apidata.jauge_r;
+            I=apidata.jauge_i;
+            C=apidata.jauge_c;
+            D=apidata.jauge_d;
+            airDefense=apidata.air_defense;
+            waterDefense=apidata.water_defense;
+            fireDefense=apidata.fire_defense;
+            earthDefense=apidata.earth_defense;
+
+            updateUI();
+        });
  
-    </script>
-
-    <script>
-   
-    // ... (rest of your script)
-
-        // Function to parse URL parameters
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        // Get the transferred data from the URL
-        var transferredData = {
-            R: getParameterByName('R'),
-            I: getParameterByName('I'),
-            C: getParameterByName('C'),
-            fireDefense: getParameterByName('fireDefense'),
-            earthDefense: getParameterByName('earthDefense'),
-            airDefense: getParameterByName('airDefense'),
-            waterDefense: getParameterByName('waterDefense')
-        };
-
-        // Update HTML elements with transferred data
-        document.getElementById('JaugeR').innerText = 'Diplomatie : ' + transferredData.R;
-        document.getElementById('JaugeI').innerText = 'Popularité : ' + transferredData.I;
-        document.getElementById('JaugeC').innerText = 'Ressources : ' + transferredData.C;
-
-        // Additional elements (you may need to update these based on your structure)
-        document.getElementsByClassName('additional-container')[0].innerText = 'Défense feu: ' + transferredData.fireDefense;
-        document.getElementsByClassName('additional-container')[1].innerText = 'Défense terre: ' + transferredData.earthDefense;
-        document.getElementsByClassName('additional-container')[2].innerText = 'Défense air: ' + transferredData.airDefense;
-        document.getElementsByClassName('additional-container')[3].innerText = 'Défense eau: ' + transferredData.waterDefense;
     </script>
 
 <!-- <script>

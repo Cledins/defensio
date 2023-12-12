@@ -69,7 +69,7 @@
    
    <script>
     // Set the duration of the timer in seconds
-    const timerDuration = 800; // Change this value to the desired duration
+    const timerDuration = 20; // Change this value to the desired duration
 
     let countdown = timerDuration;
     let countdownInterval;
@@ -209,7 +209,7 @@
     confirmButton.textContent = 'Confirm';
     confirmButton.addEventListener('click', function () {
         // Redirect to the next page with query parameters
-        const url = `/debrief1?R=${R}&I=${I}&C=${C}&D=${D}&fireDefense=${fireDefense}&earthDefense=${earthDefense}&airDefense=${airDefense}&waterDefense=${waterDefense}`;
+        const url = `/debrief1`;
 
         // Redirect to debrief1.html with query parameters
         window.location.href = url;

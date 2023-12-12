@@ -9,7 +9,7 @@ class UserMetrics(db.Model):
     jauge_i = db.Column(db.Integer, nullable=False, default=0)
     jauge_r = db.Column(db.Integer, nullable=False, default=0)
     jauge_c = db.Column(db.Integer, nullable=False, default=0)
-    jauge_4 = db.Column(db.Integer, nullable=False, default=0)
+    jauge_d = db.Column(db.Integer, nullable=False, default=0)
     air_defense = db.Column(db.Integer, nullable=False, default=0)
     water_defense = db.Column(db.Integer, nullable=False, default=0)
     fire_defense = db.Column(db.Integer, nullable=False, default=0)
