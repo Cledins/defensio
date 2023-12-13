@@ -77,6 +77,11 @@ def create_app():
     @app.route('/')
     def login():
         return render_template("login.html")
+    
+    #tableauprevention
+    @app.route('/tableauprevention')
+    def tableauprevention():
+        return render_template(tableauprevention.html)
 
     #débrief1
     @app.route('/debrief1')
