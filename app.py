@@ -101,9 +101,9 @@ def create_app():
                 id = request.form.get('number')
                 nouvelles_metrics = UserMetrics(
                     id=int(id),
-                    jauge_i=30,
-                    jauge_r=30,
-                    jauge_c=30,
+                    jauge_i=50,
+                    jauge_r=50,
+                    jauge_c=50,
                     jauge_d=0, 
                     air_defense=0,
                     water_defense=0,
@@ -165,9 +165,9 @@ def create_app():
         userMetrics = db.session.query(UserMetrics).get(user)
 
         if userMetrics:
-            userMetrics.jauge_i = 30
-            userMetrics.jauge_r = 30
-            userMetrics.jauge_c = 30
+            userMetrics.jauge_i = 50
+            userMetrics.jauge_r = 50
+            userMetrics.jauge_c = 50
             userMetrics.jauge_d = 0
             userMetrics.air_defense=0
             userMetrics.water_defense=0
