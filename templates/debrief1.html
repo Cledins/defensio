@@ -16,44 +16,6 @@
             </form>
             
     <script>
-        // Function to parse URL parameters
-       /* function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        // Get the transferred data from the URL
-        var transferredData = {
-            R: getParameterByName('R'),
-            I: getParameterByName('I'),
-            C: getParameterByName('C'),
-            D : getParameterByName('D'),
-            fireDefense: getParameterByName('fireDefense'),
-            earthDefense: getParameterByName('earthDefense'),
-            airDefense: getParameterByName('airDefense'),
-            waterDefense: getParameterByName('waterDefense')
-        };
-
-        // Store the transferred data in variables
-        var storedR = transferredData.R;
-        var storedI = transferredData.I;
-        var storedC = transferredData.C;
-        var storedD = transferredData.D;
-        var storedFireDefense = transferredData.fireDefense;
-        var storedEarthDefense = transferredData.earthDefense;
-        var storedAirDefense = transferredData.airDefense;
-        var storedWaterDefense = transferredData.waterDefense;
-
-        // You can now use these variables later in second_phase.html*/
-    </script>
-
-
-    <script>
         function redirectToSecondPhase() {
             // Redirect to the next page with query parameters
             const url = `/second_phase`;
@@ -61,12 +23,7 @@
         }
     </script>
 
-
-        
-            
-                     
-        </div>
-    
+    <div>
         <!-- Waves Container -->
         <div class="waves-container">
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
