@@ -80,27 +80,24 @@
         let fireDefense, earthDefense, airDefense, waterDefense;
     
         function confirmMessage1() {
-            // Decrease fire_defense by 5 (adjust the variable names based on your code)
-            fireDefense -= 5;
-    
-            // Update the UI with the new defense values
+         
+            fireDefense -= 10;
+
             updateUI();
     
             document.getElementById('floating-message1').style.display = 'none';
         }
     
         function confirmMessage2() {
-            // Decrease air_defense by 5 (adjust the variable names based on your code)
-            airDefense -= 5;
-    
-            // Update the UI with the new defense values
+
+            airDefense -= 10;
             updateUI();
     
             document.getElementById('floating-message2').style.display = 'none';
         }
     
         // Set the duration of the timer in seconds
-        const timerDuration = 10; // Change this value to the desired duration
+        const timerDuration = 350; // Change this value to the desired duration
     
         let countdown = timerDuration;
         let countdownInterval;
