@@ -17,6 +17,8 @@ import requests
 import json 
 import random as rd
 import csv
+import sqlite3
+import io
 from tqdm import tqdm
 import phases.first_phase       #on sait jamais de combien de librairies on a besoin
 
@@ -184,8 +186,17 @@ def create_app():
         else:
             return jsonify({'error': 'Utilisateur non trouvé'}), 404
     @app.route('/download_debrief1')
-    def download_debrief1():
-        return send_file('./data.db')
+    def export_data():
+        conn = sqlite3.connect('./data.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM user_metrics')
+        data = cursor.fetchall()
+
+        csv_data = io.StringIO()
+        csv_writer = csv.writer(csv_data)
+        csv_writer.writerows(data)
+
+        return csv_data.getvalue()
 
     return app
 
