@@ -81,7 +81,7 @@ def create_app():
     #tableauprevention
     @app.route('/tableauprevention')
     def tableauprevention():
-        return render_template(tableauprevention.html)
+        return render_template("tableauprevention.html")
 
     #débrief1
     @app.route('/debrief1')
@@ -183,8 +183,13 @@ def create_app():
             return jsonify({'message': 'UserMetrics updated successfully'})
         else:
             return jsonify({'error': 'Utilisateur non trouvé'}), 404
+    @app.route('/download_debrief1')
+    def download_debrief1():
+        return send_file('./data.db')
 
     return app
+
+    
 
 
 class Base(DeclarativeBase):
