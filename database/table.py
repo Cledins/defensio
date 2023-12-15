@@ -14,3 +14,5 @@ class UserMetrics(db.Model):
     water_defense = db.Column(db.Integer, nullable=False, default=0)
     fire_defense = db.Column(db.Integer, nullable=False, default=0)
     earth_defense = db.Column(db.Integer, nullable=False, default=0)
+    compteur_cartes = db.Column(db.Integer, nullable=False, default=0)
+    timer_total = db.Column(db.Integer, nullable=False, default=0)

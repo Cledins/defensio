@@ -237,7 +237,8 @@
         water_defense: wd,
         earth_defense: ed,
         fire_defense: fd,
-        air_defense: ad
+        air_defense: ad, 
+        timer_total:timerDuration-countdown
     };
 
     console.log('Sending PUT request with data:', formData);
@@ -285,6 +286,7 @@
     let I = 50;
     let C = 50;
     let D = 0;
+    let compteur_cartes = 0;
     let fireDefense = 0;
     let earthDefense = 0;
     let airDefense = 0;
@@ -304,6 +306,7 @@
             waterDefense=apidata.water_defense;
             fireDefense=apidata.fire_defense;
             earthDefense=apidata.earth_defense;
+            compteur_cartes=api.compteur_cartes;
 
             updateUI();
         });

@@ -119,7 +119,9 @@ def create_app():
                     air_defense=0,
                     water_defense=0,
                     earth_defense=0,
-                    fire_defense=0
+                    fire_defense=0, 
+                    compteur_cartes=0, 
+                    timer_total=0
                 )
                 db.session.add(nouvelles_metrics)
                 db.session.commit()
@@ -147,7 +149,9 @@ def create_app():
                         'water_defense':userMetrics.water_defense, 
                         'earth_defense': userMetrics.earth_defense, 
                         'air_defense':userMetrics.air_defense, 
-                        'fire_defense': userMetrics.fire_defense})
+                        'fire_defense': userMetrics.fire_defense, 
+                        'compteur_cartes':userMetrics.compteur_cartes, 
+                        'timer_total':userMetrics.timer_total})
 
     @app.route('/put-jauge/<user>', methods=['PUT'])
     def putjauge(user):
@@ -164,7 +168,8 @@ def create_app():
             userMetrics.earth_defense += data.get('earth_defense', 0)
             userMetrics.fire_defense += data.get('fire_defense', 0)
             userMetrics.air_defense += data.get('air_defense', 0)
-
+            userMetrics.compteur_cartes += 1
+            userMetrics.timer_total = data.get('timer_total')
             db.session.commit()
 
             return jsonify({'message': 'UserMetrics updated successfully'})
@@ -184,6 +189,8 @@ def create_app():
             userMetrics.water_defense=0
             userMetrics.earth_defense=0
             userMetrics.fire_defense=0
+            userMetrics.compteur_cartes=0
+            userMetrics.timer_total=0
             db.session.commit()
 
             return jsonify({'message': 'UserMetrics updated successfully'})
