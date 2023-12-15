@@ -99,10 +99,14 @@ def create_app():
     @app.route('/debrief2')
     def debrief2():
         return render_template("debrief2.html")
+
+    #phase3/fin?
+    @app.route('/third_phase')
+    def third_phase():
+        return render_template("third_phase.html")
     
     @app.route('/session', methods=['POST'])
     def identification():
-        success=False
         if request.method=='POST':
             try:
                 id = request.form.get('number')
@@ -121,7 +125,7 @@ def create_app():
                 db.session.commit()
             except:
                 None
-        resp = jsonify(success=success)
+        resp = jsonify(success=True)
         return render_template("index.html")
 
     # Flask endpoint to serve card data
