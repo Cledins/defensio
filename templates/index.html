@@ -22,16 +22,16 @@
     <div id="flex-container-2" class="flex-container">
         <!-- Jauges -->    
         <div>
-            <img src="/static/C.png" alt="Jauge C">
-            <div id="JaugeC"></div>
+            <img src="/static/I.png" alt="Jauge I">
+            <div id="JaugeI"></div>
         </div>
         <div>
             <img src="/static/R.png" alt="Jauge R">
             <div id="JaugeR"></div>
         </div>
         <div>
-            <img src="/static/I.png" alt="Jauge I">
-            <div id="JaugeI"></div>
+            <img src="/static/C.png" alt="Jauge C">
+            <div id="JaugeC"></div>
         </div>
     </div>
     
@@ -68,7 +68,7 @@
    
    <script>
     // Set the duration of the timer in seconds
-    const timerDuration = 2; // Change this value to the desired duration
+    const timerDuration = 20; // Change this value to the desired duration
 
     let countdown = timerDuration;
     let countdownInterval;
@@ -119,9 +119,9 @@
         const leftColumn = document.createElement('div');
         leftColumn.id = 'left-column';
         leftColumn.innerHTML = `
-            <p>Si oui, les ressources : ${card.effect_yes_C}</p>
+            <p>Si oui, les ressources : ${card.effect_yes_I}</p>
             <p>Si oui, la diplomatie : ${card.effect_yes_R}</p>     
-            <p>Si oui, la popularité : ${card.effect_yes_I}</p>
+            <p>Si oui, la popularité : ${card.effect_yes_C}</p>
             
         `;
         columnsContainer.appendChild(leftColumn);
@@ -233,7 +233,7 @@
         jauge_i: i,
         jauge_r: r,
         jauge_c: c,
-        jauge_d: 0,
+        jauge_d: d,
         water_defense: wd,
         earth_defense: ed,
         fire_defense: fd,
@@ -265,8 +265,8 @@
     function updateUI() {
         // Update gauge values
         document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
-        document.getElementById('JaugeI').innerText = `Popularité : ${I}`;
-        document.getElementById('JaugeC').innerText = `Ressources : ${C}`;
+        document.getElementById('JaugeI').innerText = `Ressources : ${I}`;
+        document.getElementById('JaugeC').innerText = `Popularité : ${C}`;
 
         // Update defense values
         const defenseFeu = parseInt(fireDefense);
