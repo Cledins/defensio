@@ -47,21 +47,51 @@
             <div class="additional-container">Défense air</div>
             <div class="additional-container">Défense eau</div>
         </div>
-
-    
-        <label for="exchanges">Nombre d'échanges : </label>
-        <input type="number" id="exchanges" min="0">
-
-        <label for="donations">Donations : </label>
-        <input type="number" id="donations" min="0">
-
-        <label for="received">Reçus : </label>
-        <input type="number" id="received" min="0">
-
-        <button onclick="submitI()">Soumettre</button>
-
         
     </div>
+
+    
+
+    <div id="flex-container-4" class="flex-container">
+        <p3>Echanges</p3>
+        <div id="flex-container-5" class="flex-container">
+            <select id="defense-left">
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
+                <option value="defense-air">Défense air</option>
+                <option value="defense-eau">Défense eau</option>
+            </select>
+    
+            <span>Contre</span>
+    
+            <select id="defense-right">
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
+                <option value="defense-air">Défense air</option>
+                <option value="defense-eau">Défense eau</option>
+            </select>
+    
+            <button id="submit-btn">Soumettre</button>
+
+        </div>
+        
+        <div id="flex-container-5" class="flex-container">
+            <p3>Donations</p3>
+            <input type="number" id="donation-input" name="Nombre de donations" placeholder="Nombre de donations">
+            <button id="submit-btn">Soumettre</button>
+        </div>
+
+        <div id="flex-container-6" class="flex-container">
+            <p3>Reçus</p3>
+            <input type="number" id="received-input" name="Nombre de reçus" placeholder="Nombre de reçus">
+            <button id="submit-btn">Soumettre</button>
+        </div>
+        
+    </div>
+
+    <button onclick="submitI()">Passer au débrief 2</button>
+
+    
 
     
 
@@ -98,7 +128,7 @@
         }
     
         // Set the duration of the timer in seconds
-        const timerDuration = 2; // Change this value to the desired duration
+        const timerDuration = 10; // Change this value to the desired duration
     
         let countdown = timerDuration;
         let countdownInterval;
