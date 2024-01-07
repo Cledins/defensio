@@ -29,6 +29,12 @@ def convert_to_int(value):
     else:
         return 0
 
+def convert_bonus_to_list(bonus):
+    if bonus=='':
+        return([0,0,0])
+    else:
+        return([int(elt) for elt in bonus.split(',')])
+
 # Read TSV file and parse card data
 def read_card_data(file_path):
     cards = []
@@ -37,6 +43,9 @@ def read_card_data(file_path):
         for idx, row in enumerate(reader):
             if row['Oui_R'] == '':
                 break
+
+            bonus_oui = convert_bonus_to_list(row.get('bonus_oui_RCI', ''))
+            bonus_non = convert_bonus_to_list(row.get('bonus_non_RCI', ''))
 
             card = {
                 'index': idx,
@@ -55,8 +64,18 @@ def read_card_data(file_path):
                 'earth_defense': convert_to_int(row['terre']),
                 'air_defense': convert_to_int(row['air']),
                 'water_defense': convert_to_int(row['eau']),
+
+                'bonus_oui_R': bonus_oui[0],
+                'bonus_oui_C': bonus_oui[1],
+                'bonus_oui_I': bonus_oui[2],
+                
+                'bonus_non_R': bonus_non[0],
+                'bonus_non_C': bonus_non[1],
+                'bonus_non_I': bonus_non[2],
+
                 'intro': row.get('intro', ''),
-                'outro': row.get('outro', '')
+                'outro': row.get('outro', ''),
+
             }
 
             cards.append(card)
@@ -67,7 +86,7 @@ def create_app():
     basedir = os.path.abspath(os.path.dirname(__file__))
 
     #Generate the cards only once
-    cards = read_card_data('./static/cartes_action.tsv')
+    cards = read_card_data('./static/cartes_action_test.tsv')
 
     app = Flask(__name__)
 
@@ -116,6 +135,9 @@ def create_app():
                     jauge_r=50,
                     jauge_c=50,
                     jauge_d=0, 
+                    bonus_i=0,
+                    bonus_r=0,
+                    bonus_c=0,           
                     air_defense=0,
                     water_defense=0,
                     earth_defense=0,
@@ -146,6 +168,9 @@ def create_app():
                         'jauge_i': userMetrics.jauge_i, 
                         'jauge_r':userMetrics.jauge_r, 
                         'jauge_d':userMetrics.jauge_d, 
+                        'bonus_i':userMetrics.bonus_i,
+                        'bonus_r':userMetrics.bonus_r,
+                        'bonus_c':userMetrics.bonus_c,  
                         'water_defense':userMetrics.water_defense, 
                         'earth_defense': userMetrics.earth_defense, 
                         'air_defense':userMetrics.air_defense, 
@@ -164,6 +189,9 @@ def create_app():
             userMetrics.jauge_r += data.get('jauge_r', 0)
             userMetrics.jauge_c += data.get('jauge_c', 0)
             userMetrics.jauge_d += data.get('jauge_d', 0)
+            userMetrics.bonus_i += data.get('bonus_i', 0)
+            userMetrics.bonus_r += data.get('bonus_r', 0)
+            userMetrics.bonus_c += data.get('bonus_c', 0)
             userMetrics.water_defense += data.get('water_defense', 0)
             userMetrics.earth_defense += data.get('earth_defense', 0)
             userMetrics.fire_defense += data.get('fire_defense', 0)

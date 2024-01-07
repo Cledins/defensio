@@ -166,14 +166,31 @@
             earthDefense = parseInt(earthDefense) + currentCard.earth_defense;
             airDefense = parseInt(airDefense) + currentCard.air_defense;
             waterDefense = parseInt(waterDefense) + currentCard.water_defense;
-            updateMetrics(currentCard.effect_yes_R,currentCard.effect_yes_I,currentCard.effect_yes_C, currentCard.effect_yes_D, currentCard.water_defense,currentCard.earth_defense,currentCard.fire_defense,currentCard.air_defense);
+            updateMetrics(currentCard.effect_yes_R,
+                        currentCard.effect_yes_I,
+                        currentCard.effect_yes_C, 
+                        currentCard.effect_yes_D, 
+                        currentCard.bonus_oui_I,
+                        currentCard.bonus_oui_R,
+                        currentCard.bonus_oui_C,
+                        currentCard.water_defense,
+                        currentCard.earth_defense,
+                        currentCard.fire_defense,
+                        currentCard.air_defense);
             
         } else if (choice === 'no') {
             R += currentCard.effect_no_R;
             I += currentCard.effect_no_I;
             C += currentCard.effect_no_C;
             D += currentCard.effect_no_D;
-            updateMetrics(currentCard.effect_no_R,currentCard.effect_no_I,currentCard.effect_no_C, currentCard.effect_no_D, 0, 0, 0);
+            updateMetrics(currentCard.effect_no_R,
+                        currentCard.effect_no_I,
+                        currentCard.effect_no_C, 
+                        currentCard.effect_no_D, 
+                        currentCard.bonus_non_I,
+                        currentCard.bonus_non_R,
+                        currentCard.bonus_non_C,
+                        0, 0, 0);
             
         }
 
@@ -228,12 +245,15 @@
     document.body.appendChild(confirmationContainer);
     }
 
-    function updateMetrics(r, i, c, d, wd, ed, fd, ad) {
+    function updateMetrics(r, i, c, d, bonus_i, bonus_r, bonus_c, wd, ed, fd, ad) {
     const formData = {
         jauge_i: i,
         jauge_r: r,
         jauge_c: c,
         jauge_d: d,
+        bonus_c:bonus_c,
+        bonus_i:bonus_i,
+        bonus_r:bonus_r,
         water_defense: wd,
         earth_defense: ed,
         fire_defense: fd,
