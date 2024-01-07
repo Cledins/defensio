@@ -196,8 +196,11 @@ def create_app():
             userMetrics.earth_defense += data.get('earth_defense', 0)
             userMetrics.fire_defense += data.get('fire_defense', 0)
             userMetrics.air_defense += data.get('air_defense', 0)
-            userMetrics.compteur_cartes += 1
-            userMetrics.timer_total = data.get('timer_total')
+
+            if 'timer_total' in data:
+                userMetrics.timer_total = data['timer_total']
+                userMetrics.compteur_cartes += 1
+
             db.session.commit()
 
             return jsonify({'message': 'UserMetrics updated successfully'})
