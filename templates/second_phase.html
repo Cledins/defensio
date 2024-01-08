@@ -25,27 +25,30 @@
     <div id="flex-container-2" class="flex-container">
         <!-- Jauges -->    
         <div>
-            <img src="/static/C.png" alt="Jauge C">
-            <div id="JaugeC"></div>
+            <img src="/static/I.png" alt="Jauge I">
+            <div id="JaugeI"></div>
         </div>
         <div>
             <img src="/static/R.png" alt="Jauge R">
             <div id="JaugeR"></div>
         </div>
+
         <div>
-            <img src="/static/I.png" alt="Jauge I">
-            <div id="JaugeI"></div>
+            <img src="/static/C.png" alt="Jauge C">
+            <div id="JaugeC"></div>
         </div>
+        
     </div>
     
     <div id="flex-container-3" class="flex-container">
 
         <div class="additional-containers">
             <!-- Additional flex containers (4 in this example) -->
-            <div class="additional-container">Défense feu</div>
-            <div class="additional-container">Défense terre</div>
             <div class="additional-container">Défense air</div>
             <div class="additional-container">Défense eau</div>
+            <div class="additional-container">Défense feu</div>
+            <div class="additional-container">Défense terre</div>
+            
         </div>
         
     </div>
@@ -56,19 +59,19 @@
         <p3>Echanges</p3>
         <div id="flex-container-5" class="flex-container">
             <select id="defense-left">
-                <option value="defense-feu">Défense feu</option>
-                <option value="defense-terre">Défense terre</option>
                 <option value="defense-air">Défense air</option>
                 <option value="defense-eau">Défense eau</option>
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
             </select>
     
             <span>Contre</span>
     
             <select id="defense-right">
-                <option value="defense-feu">Défense feu</option>
-                <option value="defense-terre">Défense terre</option>
                 <option value="defense-air">Défense air</option>
                 <option value="defense-eau">Défense eau</option>
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
             </select>
     
             <button id="submit-btn" onclick="exchange()">Soumettre</button>
@@ -77,10 +80,10 @@
         <div id="flex-container-6" class="flex-container">
             <p3>Donations</p3>
             <select id="defense-gifted">
-                <option value="defense-feu">Défense feu</option>
-                <option value="defense-terre">Défense terre</option>
                 <option value="defense-air">Défense air</option>
                 <option value="defense-eau">Défense eau</option>
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
             </select>
             
             <button id="submit-btn" onclick="donate()">Soumettre</button>
@@ -89,10 +92,10 @@
         <div id="flex-container-7" class="flex-container">
             <p3>Reçus</p3>
             <select id="defense-received">
-                <option value="defense-feu">Défense feu</option>
-                <option value="defense-terre">Défense terre</option>
                 <option value="defense-air">Défense air</option>
                 <option value="defense-eau">Défense eau</option>
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
             </select>
             
             <button id="submit-btn" onclick="receive()">Soumettre</button>
@@ -200,7 +203,7 @@
     
 
     <script>
-        let fireDefense, earthDefense, airDefense, waterDefense;
+        let  airDefense, waterDefense, fireDefense, earthDefense;
     
         function confirmMessage1() {
          
@@ -265,20 +268,21 @@
         let R, I, C, D;
         function updateUI() {
             // Update gauge values
-            document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
             document.getElementById('JaugeI').innerText = `Popularité : ${I}`;
+            document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
             document.getElementById('JaugeC').innerText = `Ressources : ${C}`;
 
             // Update defense values
-            const defenseFeu = parseInt(fireDefense);
-            const defenseTerre = parseInt(earthDefense);
             const defenseAir = parseInt(airDefense);
             const defenseEau = parseInt(waterDefense);
+            const defenseFeu = parseInt(fireDefense);
+            const defenseTerre = parseInt(earthDefense);
 
-            document.getElementsByClassName('additional-container')[0].innerText = `Défense feu: ${parseInt(defenseFeu)}`;
-            document.getElementsByClassName('additional-container')[1].innerText = `Défense terre: ${parseInt(defenseTerre)}`;
-            document.getElementsByClassName('additional-container')[2].innerText = `Défense air: ${parseInt(defenseAir)}`;
-            document.getElementsByClassName('additional-container')[3].innerText = `Défense eau: ${parseInt(defenseEau)}`;
+            document.getElementsByClassName('additional-container')[0].innerText = `Défense air: ${parseInt(defenseAir)}`;
+            document.getElementsByClassName('additional-container')[1].innerText = `Défense eau: ${parseInt(defenseEau)}`;
+            document.getElementsByClassName('additional-container')[2].innerText = `Défense feu: ${parseInt(defenseFeu)}`;
+            document.getElementsByClassName('additional-container')[3].innerText = `Défense terre: ${parseInt(defenseTerre)}`;
+            
         }
 
         fetch('/get-jauge/'+storedNumber)
@@ -306,31 +310,6 @@
     </script>
    
 
-    <!-- <script>
-     function submitInputs() {
-        // Get values from input elements
-        const exchangesValue = parseInt(document.getElementById('exchanges').value) || 0;
-        const donationsValue = parseInt(document.getElementById('donations').value) || 0;
-        const receivedValue = parseInt(document.getElementById('received').value) || 0;
-
-        // Update metrics based on input values
-        updateMetricsForInputs(exchangesValue, donationsValue, receivedValue);
-
-        // You can send the values to the server using fetch or update the UI accordingly
-    }
-
-    function updateMetricsForInputs(exchanges, donations, received) {
-        // Update metrics based on input values
-        R += 5 * exchanges;
-        C += 5 * received;
-        I += 10 * donations;
-        C -= 10 * donations;
-        I -= 2 * received;
-
-        // Update UI elements
-        updateUI();
-    }
-
-</script> -->
+ 
 </body>
 </html>

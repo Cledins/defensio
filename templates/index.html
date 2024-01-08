@@ -43,10 +43,10 @@
 
         <div class="additional-containers">
             <!-- Additional flex containers (4 in this example) -->
-            <div class="additional-container">Défense feu</div>
-            <div class="additional-container">Défense terre</div>
             <div class="additional-container">Défense air</div>
             <div class="additional-container">Défense eau</div>
+            <div class="additional-container">Défense feu</div>
+            <div class="additional-container">Défense terre</div>
         </div>
     </div>
 
@@ -68,7 +68,7 @@
    
    <script>
     // Set the duration of the timer in seconds
-    const timerDuration = 900; // Change this value to the desired duration
+    const timerDuration = 720; // Change this value to the desired duration
 
     let countdown = timerDuration;
     let countdownInterval;
@@ -130,10 +130,11 @@
         const rightColumn = document.createElement('div');
         rightColumn.id = 'right-column';
         rightColumn.innerHTML = `
-            <p>Défense feu : + ${card.fire_defense}</p>
-            <p>Défense terre : + ${card.earth_defense}</p>
             <p>Défense air : + ${card.air_defense}</p>
             <p>Défense eau : + ${card.water_defense}</p>
+            <p>Défense feu : + ${card.fire_defense}</p>
+            <p>Défense terre : + ${card.earth_defense}</p>
+            
         `;
         columnsContainer.appendChild(rightColumn);
 
@@ -158,33 +159,34 @@
 
         // Apply effects based on the user's choice
         if (choice === 'yes') {
-            R += currentCard.effect_yes_R;
             I += currentCard.effect_yes_I;
+            R += currentCard.effect_yes_R;
             C += currentCard.effect_yes_C;
             D += currentCard.effect_yes_D;
-            fireDefense = parseInt(fireDefense) + currentCard.fire_defense;
-            earthDefense = parseInt(earthDefense) + currentCard.earth_defense;
             airDefense = parseInt(airDefense) + currentCard.air_defense;
             waterDefense = parseInt(waterDefense) + currentCard.water_defense;
-            updateMetrics(currentCard.effect_yes_R,
-                        currentCard.effect_yes_I,
+            fireDefense = parseInt(fireDefense) + currentCard.fire_defense;
+            earthDefense = parseInt(earthDefense) + currentCard.earth_defense;
+            updateMetrics(currentCard.effect_yes_I,
+                        currentCard.effect_yes_R,
                         currentCard.effect_yes_C, 
                         currentCard.effect_yes_D, 
                         currentCard.bonus_oui_I,
                         currentCard.bonus_oui_R,
                         currentCard.bonus_oui_C,
+                        currentCard.air_defense,
                         currentCard.water_defense,
-                        currentCard.earth_defense,
                         currentCard.fire_defense,
-                        currentCard.air_defense);
+                        currentCard.earth_defense,
+                        );
             
         } else if (choice === 'no') {
-            R += currentCard.effect_no_R;
             I += currentCard.effect_no_I;
+            R += currentCard.effect_no_R;
             C += currentCard.effect_no_C;
             D += currentCard.effect_no_D;
-            updateMetrics(currentCard.effect_no_R,
-                        currentCard.effect_no_I,
+            updateMetrics(currentCard.effect_no_I,
+                        currentCard.effect_no_R,
                         currentCard.effect_no_C, 
                         currentCard.effect_no_D, 
                         currentCard.bonus_non_I,
@@ -245,7 +247,7 @@
     document.body.appendChild(confirmationContainer);
     }
 
-    function updateMetrics(r, i, c, d, bonus_i, bonus_r, bonus_c, wd, ed, fd, ad) {
+    function updateMetrics(r, i, c, d, bonus_i, bonus_r, bonus_c, ad, wd, fd, ed) {
     const formData = {
         jauge_i: i,
         jauge_r: r,
@@ -254,10 +256,11 @@
         bonus_c:bonus_c,
         bonus_i:bonus_i,
         bonus_r:bonus_r,
-        water_defense: wd,
-        earth_defense: ed,
-        fire_defense: fd,
         air_defense: ad, 
+        water_defense: wd,
+        fire_defense: fd,
+        earth_defense: ed,
+
         timer_total:timerDuration-countdown
     };
 
@@ -285,32 +288,34 @@
 
     function updateUI() {
         // Update gauge values
-        document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
         document.getElementById('JaugeI').innerText = `Ressources : ${I}`;
+        document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
         document.getElementById('JaugeC').innerText = `Popularité : ${C}`;
 
         // Update defense values
-        const defenseFeu = parseInt(fireDefense);
-        const defenseTerre = parseInt(earthDefense);
         const defenseAir = parseInt(airDefense);
         const defenseEau = parseInt(waterDefense);
-
-        document.getElementsByClassName('additional-container')[0].innerText = `Défense feu: ${parseInt(defenseFeu)}`;
-        document.getElementsByClassName('additional-container')[1].innerText = `Défense terre: ${parseInt(defenseTerre)}`;
-        document.getElementsByClassName('additional-container')[2].innerText = `Défense air: ${parseInt(defenseAir)}`;
-        document.getElementsByClassName('additional-container')[3].innerText = `Défense eau: ${parseInt(defenseEau)}`;
+        const defenseFeu = parseInt(fireDefense);
+        const defenseTerre = parseInt(earthDefense);
+        
+        document.getElementsByClassName('additional-container')[0].innerText = `Défense air: ${parseInt(defenseAir)}`;
+        document.getElementsByClassName('additional-container')[1].innerText = `Défense eau: ${parseInt(defenseEau)}`;
+        document.getElementsByClassName('additional-container')[2].innerText = `Défense feu: ${parseInt(defenseFeu)}`;
+        document.getElementsByClassName('additional-container')[3].innerText = `Défense terre: ${parseInt(defenseTerre)}`;
+        
     }
         
     // Initialize the variables
-    let R = 50;
     let I = 50;
+    let R = 50;
     let C = 50;
     let D = 0;
     let compteur_cartes = 0;
-    let fireDefense = 0;
-    let earthDefense = 0;
     let airDefense = 0;
     let waterDefense = 0;
+    let fireDefense = 0;
+    let earthDefense = 0;
+   
     let currentCardIndex = 0;
     let data_unshuffled;
     let cards;
@@ -318,8 +323,8 @@
     fetch('/get-jauge/'+storedNumber)
         .then(response => response.json())
         .then(apidata => {
-            R=apidata.jauge_r;
             I=apidata.jauge_i;
+            R=apidata.jauge_r;
             C=apidata.jauge_c;
             D=apidata.jauge_d;
             airDefense=apidata.air_defense;
