@@ -63,6 +63,38 @@ body {
     flex-direction : column;
 }
 
+#flex-container-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the containers horizontally */
+    justify-content: center; /* Center the containers vertically */
+    width: 60%;
+    margin: auto; /* Center the entire container */
+    margin-bottom: 30px;
+}
+
+.flex-container {
+    text-align: center; /* Center the text within each container */
+}
+
+#flex-container-5,
+#flex-container-6,
+#flex-container-7 {
+    margin-top: 20px; /* Add some space between the containers */
+}
+
+select {
+    font-size: 16px; /* Increase font size for selects */
+    padding: 8px; /* Add padding to selects for better appearance */
+}
+
+button {
+    font-size: 16px; /* Increase font size for buttons */
+    padding: 10px 20px; /* Add padding to buttons for better appearance */
+}
+
+
+
 /* Add more styling if necessary */
 
 #numberDisplay {

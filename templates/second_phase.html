@@ -74,15 +74,27 @@
             <button id="submit-btn" onclick="exchange()">Soumettre</button>
         </div>
         
-        <div id="flex-container-5" class="flex-container">
+        <div id="flex-container-6" class="flex-container">
             <p3>Donations</p3>
-            <input type="number" id="donation-input" name="Nombre de donations" placeholder="Nombre de donations">
+            <select id="defense-gifted">
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
+                <option value="defense-air">Défense air</option>
+                <option value="defense-eau">Défense eau</option>
+            </select>
+            
             <button id="submit-btn" onclick="donate()">Soumettre</button>
         </div>
 
-        <div id="flex-container-6" class="flex-container">
+        <div id="flex-container-7" class="flex-container">
             <p3>Reçus</p3>
-            <input type="number" id="received-input" name="Nombre de reçus" placeholder="Nombre de reçus">
+            <select id="defense-received">
+                <option value="defense-feu">Défense feu</option>
+                <option value="defense-terre">Défense terre</option>
+                <option value="defense-air">Défense air</option>
+                <option value="defense-eau">Défense eau</option>
+            </select>
+            
             <button id="submit-btn" onclick="receive()">Soumettre</button>
         </div>
         
@@ -168,6 +180,7 @@
 
         }
     </script>
+    
     <button onclick="submitI()">Passer au débrief 2</button>
 
     
