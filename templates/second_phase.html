@@ -113,6 +113,8 @@
                 return;
             }
 
+            C+=5;
+
             const formData = {
                 jauge_c: 5,
                 water_defense: 0,
@@ -123,23 +125,33 @@
             
             if (valueDefenseLeft === "defense-terre") {
                 formData.earth_defense = -1;
+                earthDefense -= 1;
             } else if (valueDefenseLeft === "defense-eau") {
                 formData.water_defense = -1;
+                waterDefense -= 1;
             } else if (valueDefenseLeft === "defense-feu") {
                 formData.fire_defense = -1;
+                fireDefense -= 1;
             } else if (valueDefenseLeft === "defense-air") {
                 formData.air_defense = -1;
+                airDefense -= 1;
             }
 
             if (valueDefenseRight === "defense-terre") {
                 formData.earth_defense = 1;
+                earthDefense += 1;
             } else if (valueDefenseRight === "defense-eau") {
                 formData.water_defense = 1;
+                waterDefense += 1;
             } else if (valueDefenseRight === "defense-feu") {
                 formData.fire_defense = 1;
+                fireDefense += 1;
             } else if (valueDefenseRight === "defense-air") {
                 formData.air_defense = 1;
+                airDefense += 1;
             }
+
+            updateUI();
 
             fetch(`/put-jauge/${storedNumber}`, {
                 method: 'PUT',
@@ -159,24 +171,13 @@
                 console.error('Error updating metrics:', error);
             });
 
-            fetch('/get-jauge/'+storedNumber)
-            .then(response => response.json())
-            .then(apidata => {
-                R=apidata.jauge_r;
-                I=apidata.jauge_i;
-                C=apidata.jauge_c;
-                D=apidata.jauge_d;
-                airDefense=apidata.air_defense;
-                waterDefense=apidata.water_defense;
-                fireDefense=apidata.fire_defense;
-                earthDefense=apidata.earth_defense;
-
-                updateUI();
-            });
         }
 
         function donate() {
             var valueDonation = document.getElementById("defense-gifted").value;
+
+            I-=2;
+            R+=5;
 
             const formData = {
                 jauge_i: -2,
@@ -189,13 +190,19 @@
             
             if (valueDonation === "defense-terre") {
                 formData.earth_defense = -1;
+                earthDefense -= 1;
             } else if (valueDonation === "defense-eau") {
                 formData.water_defense = -1;
+                waterDefense -= 1;
             } else if (valueDonation === "defense-feu") {
                 formData.fire_defense = -1;
+                fireDefense -= 1;
             } else if (valueDonation === "defense-air") {
                 formData.air_defense = -1;
+                airDefense -= 1;
             }
+
+            updateUI();
 
             fetch(`/put-jauge/${storedNumber}`, {
                 method: 'PUT',
@@ -215,25 +222,15 @@
                 console.error('Error updating metrics:', error);
             });
 
-            fetch('/get-jauge/'+storedNumber)
-            .then(response => response.json())
-            .then(apidata => {
-                I=apidata.jauge_i;
-                R=apidata.jauge_r;
-                C=apidata.jauge_c;
-                D=apidata.jauge_d;
-                airDefense=apidata.air_defense;
-                waterDefense=apidata.water_defense;
-                fireDefense=apidata.fire_defense;
-                earthDefense=apidata.earth_defense;
-
-                updateUI();
-            });
+            
 
         }
 
         function receive() {
             var valueReception = document.getElementById("defense-received").value;
+
+            I+=10;
+            R-=10;
 
             const formData = {
                 jauge_i: 10,
@@ -246,13 +243,19 @@
 
             if (valueReception === "defense-terre") {
                 formData.earth_defense = 1;
+                earthDefense += 1;
             } else if (valueReception === "defense-eau") {
                 formData.water_defense = 1;
+                waterDefense += 1;
             } else if (valueReception === "defense-feu") {
                 formData.fire_defense = 1;
+                fireDefense += 1;
             } else if (valueReception === "defense-air") {
                 formData.air_defense = 1;
+                airDefense += 1;
             }
+
+            updateUI();
 
             fetch(`/put-jauge/${storedNumber}`, {
                 method: 'PUT',
@@ -271,21 +274,7 @@
             .catch(error => {
                 console.error('Error updating metrics:', error);
             });
-
-            fetch('/get-jauge/'+storedNumber)
-            .then(response => response.json())
-            .then(apidata => {
-                I=apidata.jauge_i;
-                R=apidata.jauge_r;
-                C=apidata.jauge_c;
-                D=apidata.jauge_d;
-                airDefense=apidata.air_defense;
-                waterDefense=apidata.water_defense;
-                fireDefense=apidata.fire_defense;
-                earthDefense=apidata.earth_defense;
-
-                updateUI();
-            });
+            
         }
     </script>
     
@@ -297,12 +286,12 @@
 
         <!-- Floating message container -->
     <div id="floating-message1" class="floating-message">
-        <p>Le dragon éternue, créant une vague de flammes traversant l'empire. -10 en défense feu</p>
+        <p>Le dragon éternue, créant une vague de flammes traversant l'empire. -4 en défense feu</p>
         <button onclick="confirmMessage1()">Ne pas paniquer</button>
     </div>
 
     <div id="floating-message2" class="floating-message">
-        <p>Le dragon s'étire, ses ailes battent et l'empire doit résister à ces tempêtes. -10 en défense air</p>
+        <p>Le dragon s'étire, ses ailes battent et l'empire doit résister à ces tempêtes. -4 en défense air</p>
         <button onclick="confirmMessage2()">Ne pas paniquer</button>
     </div>
     
@@ -312,19 +301,64 @@
     
         function confirmMessage1() {
          
-            fireDefense -= 10;
+            fireDefense -= 4;
 
             updateUI();
+
     
             document.getElementById('floating-message1').style.display = 'none';
+
+            const formData = {
+                fire_defense: -4,
+            };
+
+            fetch(`/put-jauge/${storedNumber}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => {
+                console.log('Received response:', response);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Received JSON data:', data);
+            })
+            .catch(error => {
+                console.error('Error updating metrics:', error);
+            });
         }
     
         function confirmMessage2() {
 
-            airDefense -= 10;
+            airDefense -= 4;
             updateUI();
     
             document.getElementById('floating-message2').style.display = 'none';
+
+            const formData = {
+                air_defense: -4,
+            };
+
+            fetch(`/put-jauge/${storedNumber}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => {
+                console.log('Received response:', response);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Received JSON data:', data);
+            })
+            .catch(error => {
+                console.error('Error updating metrics:', error);
+            });
         }
     
         // Set the duration of the timer in seconds
