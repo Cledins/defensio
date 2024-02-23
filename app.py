@@ -240,12 +240,6 @@ def create_app():
 
         return csv_data.getvalue()
 
-    @app.route('/download-rpg-game')
-    def dowloadgame():
-        return send_file('../MyFirstGameSetup.exe',as_attachment=True)
-
-    return app
-
     
 
 
