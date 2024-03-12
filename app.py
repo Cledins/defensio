@@ -239,6 +239,8 @@ def create_app():
         csv_writer.writerows(data)
 
         return csv_data.getvalue()
+    
+    return app
 
     
 
@@ -253,5 +255,5 @@ migrate = Migrate()
 if __name__ == '__main__':
     app = create_app()
     app.run(port=10407)
-
+   
 
