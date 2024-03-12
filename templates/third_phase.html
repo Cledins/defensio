@@ -12,15 +12,12 @@
     
     <body class="bg-gray-200">
         <div id="flex-container-1" class="flex-container">
-                <!-- Logo en haut à gauche -->
                 <img src="/static/logo.png" alt="Votre Logo" class="w-12 h-12">
-                <!-- Numéro du groupe en haut à droite -->
                 <div id="numberDisplay" class="text-xl font-bold"></div>
            
         </div>
         
-        <div id="flex-container-2" class="flex-container">
-            <!-- Jauges -->    
+        <div id="flex-container-2" class="flex-container">  
             <div>
                 <img src="/static/I.png" alt="Jauge I">
                 <div id="JaugeI"></div>
@@ -44,7 +41,6 @@
         <div id="flex-container-3" class="flex-container">
     
             <div class="additional-containers">
-                <!-- Additional flex containers (4 in this example) -->
                 <div class="additional-container">Défense air</div>
                 <div class="additional-container">Défense eau</div>
                 <div class="additional-container">Défense feu</div>
@@ -75,18 +71,16 @@
 <script>
     let R, I, C, D;
     function updateUI() {
-        // Update gauge values
         document.getElementById('JaugeI').innerText = `Ressources : ${I}`;
         document.getElementById('JaugeR').innerText = `Diplomatie : ${R}`;
         document.getElementById('JaugeC').innerText = `Popularité : ${C}`;
         document.getElementById('JaugeD').innerText = `Durabilité : ${D}`;
-        // Update defense values
+       
         const defenseAir = parseInt(airDefense);
         const defenseEau = parseInt(waterDefense);
         const defenseFeu = parseInt(fireDefense);
         const defenseTerre = parseInt(earthDefense);
-        
-
+    
         document.getElementsByClassName('additional-container')[0].innerText = `Défense air: ${parseInt(defenseAir)}`;
         document.getElementsByClassName('additional-container')[1].innerText = `Défense eau: ${parseInt(defenseEau)}`;
         document.getElementsByClassName('additional-container')[2].innerText = `Défense feu: ${parseInt(defenseFeu)}`;

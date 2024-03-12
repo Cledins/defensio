@@ -22,7 +22,6 @@ import io
 from tqdm import tqdm
 import phases.first_phase       #on sait jamais de combien de librairies on a besoin
 
-# Check for empty strings and convert to integers
 def convert_to_int(value):
     if value != '':
         return(int(value)) 
@@ -35,7 +34,6 @@ def convert_bonus_to_list(bonus):
     else:
         return([int(elt) for elt in bonus.split(',')])
 
-# Read TSV file and parse card data
 def read_card_data(file_path):
     cards = []
     with open(file_path, 'r', newline='', encoding='utf-8') as mycsv:
@@ -85,7 +83,6 @@ def create_app():
     from database.table import UserMetrics
     basedir = os.path.abspath(os.path.dirname(__file__))
 
-    #Generate the cards only once
     cards = read_card_data('./static/cartes_action_test.tsv')
 
     app = Flask(__name__)
@@ -99,27 +96,22 @@ def create_app():
     def login():
         return render_template("login.html")
     
-    #tableauprevention
     @app.route('/tableauprevention')
     def tableauprevention():
         return render_template("tableauprevention.html")
 
-    #débrief1
     @app.route('/debrief1')
     def debrief1():
         return render_template("debrief1.html")
-    
-    #phase2
+
     @app.route('/second_phase')
     def second_phase():
         return render_template("second_phase.html")
     
-    #débrief2
     @app.route('/debrief2')
     def debrief2():
         return render_template("debrief2.html")
 
-    #phase3/fin?
     @app.route('/third_phase')
     def third_phase():
         return render_template("third_phase.html")
@@ -203,7 +195,7 @@ def create_app():
 
             db.session.commit()
 
-            return jsonify({'message': 'UserMetrics updated successfully'})
+            return jsonify({'message': 'UserMetrics mis à jour'})
         else:
             return jsonify({'error': 'Utilisateur non trouvé'}), 404
 
@@ -224,7 +216,7 @@ def create_app():
             userMetrics.timer_total=0
             db.session.commit()
 
-            return jsonify({'message': 'UserMetrics updated successfully'})
+            return jsonify({'message': 'UserMetrics mis à jour'})
         else:
             return jsonify({'error': 'Utilisateur non trouvé'}), 404
     @app.route('/download_debrief1')
